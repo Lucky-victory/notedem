@@ -1,0 +1,7 @@
+{
+  "name": "notedem",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
