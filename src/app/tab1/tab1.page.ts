@@ -21,7 +21,7 @@ export class Tab1Page implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       console.log(this.user);
-      setTimeout(() => this.getAccessToken(), 2000);
+
       this.isLoggedIn = user != null;
     });
   }
@@ -29,16 +29,13 @@ export class Tab1Page implements OnInit {
   signOut(): void {
     this.authService.signOut();
   }
-  async getAccessToken() {
-    const token = await this.authService.getAccessToken(
-      GoogleLoginProvider.PROVIDER_ID
-    );
-    console.log({ token });
-  }
+
   /**
    * Once the user is logged in, trigger manual refresh token
    */
   refreshToken(): void {
+    console.log('token refeesh');
+
     this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
   }
 }

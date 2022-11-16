@@ -6,15 +6,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {
-  GoogleInitOptions,
-  SocialAuthServiceConfig,
-} from '@abacritt/angularx-social-login';
+import { SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
-const googleLoginOptions: GoogleInitOptions = {
-  oneTapEnabled: false, // default is true
-  scopes: 'https://www.googleapis.com/auth/calendar.readonly',
-};
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
@@ -27,10 +22,7 @@ const googleLoginOptions: GoogleInitOptions = {
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '344512967346-kq3pl5vrvc7b3fc3tgmgg3g3bu8sgumr.apps.googleusercontent.com',
-              googleLoginOptions
-            ),
+            provider: new GoogleLoginProvider(environment.providers.google),
           },
         ],
         onError: (err) => {
