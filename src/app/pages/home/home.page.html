@@ -1,0 +1,43 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>home</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-split-pane
+  contentId="menu-content"
+  when="xs"
+  (ionSplitPaneVisible)="onSplitPaneVisible($event)"
+>
+  <ion-menu
+    contentId="menu-content"
+    menuId="menu-content"
+    side="start"
+    type="overlay"
+  >
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>onSplitPaneVisible</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content> start </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="menu-content"></ion-router-outlet>
+</ion-split-pane>
+<!-- <ion-content [fullscreen]="true">
+  <ion-chip color="secondary" mode="ios" *ngIf="user">
+    <ion-label>{{user.name}}</ion-label>
+    <ion-avatar>
+      <ion-img [src]="user.photoUrl"></ion-img>
+    </ion-avatar>
+  </ion-chip>
+
+  <asl-google-signin-button
+    *ngIf="!isLoggedIn"
+    size="medium"
+    type="standard"
+    logo_alignment="left"
+    size="large"
+  >
+  </asl-google-signin-button>
+</ion-content> -->
