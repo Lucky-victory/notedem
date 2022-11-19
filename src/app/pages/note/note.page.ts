@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { INote } from 'src/app/interfaces/notes.interface';
 
 @Component({
   selector: 'nd-note',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./note.page.scss'],
 })
 export class NotePage implements OnInit {
+  noteToEdit: INote;
   constructor() {}
 
   ngOnInit() {}
   onSplitPaneVisible(event) {}
+
+  onEditNote(note: INote) {
+    this.noteToEdit = note;
+  }
 }

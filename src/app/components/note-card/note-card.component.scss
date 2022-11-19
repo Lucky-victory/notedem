@@ -1,0 +1,51 @@
+.note-card {
+  --orange-rgb: 249 115 22;
+  --orange: #f97316;
+  border-radius: 8px;
+  &:hover {
+    .note-card-overlay {
+      opacity: 1;
+    }
+  }
+  .note-card-overlay {
+    border-radius: inherit;
+    border-color: var(--orange);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    .edit-button {
+      background-color: var(--orange);
+      font-size: 1.125rem;
+
+      padding: 6px 14px;
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        width: 14px;
+        height: 14px;
+        background-color: transparent;
+        border-top-right-radius: 15px;
+      }
+      &::before {
+        left: -14px;
+        top: -2px;
+        box-shadow: 6px 0px 0 var(--orange);
+      }
+      &::after {
+        right: -2px;
+        bottom: -14px;
+        box-shadow: 0px -6px 0 var(--orange);
+      }
+    }
+  }
+}
+
+.note-tags-wrapper {
+  display: flex;
+  gap: 0.25rem;
+  .note-tag {
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 4px;
+  }
+}

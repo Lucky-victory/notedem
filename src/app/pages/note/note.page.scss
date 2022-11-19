@@ -5,3 +5,12 @@
   --side-max-width: 370px;
   --width: 350px;
 }
+ion-content {
+  &.note-area {
+    min-width: 450px;
+    &::part(scroll) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

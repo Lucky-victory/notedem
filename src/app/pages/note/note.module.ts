@@ -20,7 +20,8 @@ import { NoteContentInputComponent } from 'src/app/components/note-content-input
     NotePageRoutingModule,
     NoteCardsComponent,
     NotePageCardsComponent,
-    NoteTitleInputComponent,NoteContentInputComponent
+    NoteTitleInputComponent,
+    NoteContentInputComponent,
   ],
   declarations: [NotePage],
 })

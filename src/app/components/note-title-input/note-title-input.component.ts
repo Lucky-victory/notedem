@@ -11,7 +11,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NoteTitleInputComponent implements OnInit {
   @Input() title = 'No title yet';
+  @Input() noteId: string;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.noteId);
+  }
 }

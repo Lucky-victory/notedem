@@ -1,12 +1,9 @@
 <div
   class="flex flex-wrap gap-4 pb-10 items-center justify-center px-2 pt-10 w-full"
 >
-  <nd-note-card></nd-note-card>
-  <nd-note-card></nd-note-card>
-  <nd-note-card></nd-note-card>
-  <nd-note-card></nd-note-card>
-  <nd-note-card></nd-note-card>
-  <nd-note-card></nd-note-card>
-  <nd-note-card></nd-note-card>
-  <nd-note-card></nd-note-card>
+  <nd-note-card
+    (edit)="onEdit($event)"
+    *ngFor="let note of notes | async"
+    [note]="note"
+  ></nd-note-card>
 </div>

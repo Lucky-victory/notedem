@@ -11,6 +11,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NoteContentInputComponent implements OnInit {
   @Input() content!: string;
+  @Input() noteId: string;
+  @Input() notePageId: string;
   constructor() {}
 
   ngOnInit() {}
