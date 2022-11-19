@@ -14,12 +14,12 @@ const routes: Routes = [
       import('./pages/home/home.module').then((m) => m.HomePageModule),
   },
   {
-    path: 'note',
+    path: 'notes',
     loadChildren: () =>
       import('./pages/note/note.module').then((m) => m.NotePageModule),
   },
   {
-    path: 'todo',
+    path: 'todos',
     loadChildren: () =>
       import('./pages/todo/todo.module').then((m) => m.TodoPageModule),
   },

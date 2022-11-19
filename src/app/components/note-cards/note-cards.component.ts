@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { NoteCardComponent } from './../note-card/note-card.component';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { INote } from 'src/app/interfaces/notes.interface';
 import { from, Observable, of } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'nd-note-cards',
@@ -14,6 +15,8 @@ import { from, Observable, of } from 'rxjs';
   styleUrls: ['./note-cards.component.scss'],
 })
 export class NoteCardsComponent implements OnInit {
+  @Input() canNavigate: boolean;
+  @Input() activeNoteId: string;
   @Input() notes: Observable<INote[]> = of(
     [1, 2, 3, 1, 1, 1, 1, 1].map((_, i) => ({
       id: `note_${i}`,
@@ -31,10 +34,31 @@ export class NoteCardsComponent implements OnInit {
   );
   @Output() edit = new EventEmitter<INote>();
 
-  constructor() {}
+  constructor(
+    private navCtrl: NavController,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit(): void {}
   onEdit(note: INote) {
-    console.log(note, 'From cards');
+    if (this.canNavigate) {
+      this.navCtrl.navigateForward(`/notes/edit/${note?.id}`, {
+        state: note,
+
+        queryParams: {
+          chapter: note?.pages[0]?.id,
+        },
+      });
+
+      return;
+    }
+    const tre = this.router.createUrlTree(['/notes', note?.id], {
+      queryParams: { chapter: note?.pages[0]?.id },
+    });
+    const rouState = this.router.routerState;
+    console.log({ rouState });
+
+    console.log(tre, 'From cards');
     this.edit.emit(note);
   }
 }

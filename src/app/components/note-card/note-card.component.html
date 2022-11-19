@@ -1,6 +1,9 @@
 <div
   tabindex="1"
-  class="max-w-full p-4 pt-9 w-80 max-h-60 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden text-ellipsis active-card note-card relative"
+  class="max-w-full p-4 pt-9 w-80 max-h-60 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden text-ellipsis note-card relative"
+  [ngClass]="{ 'active-card': isActive }"
+  #noteCard
+  [id]="note?.id"
 >
   <div
     class="note-card-overlay absolute inset-0 border-2 border-orange-500 rounded-lg text-right"

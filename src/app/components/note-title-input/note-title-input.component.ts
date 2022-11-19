@@ -15,6 +15,6 @@ export class NoteTitleInputComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.noteId);
+    // console.log(this.noteId);
   }
 }

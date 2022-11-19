@@ -1,9 +1,68 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>note-editor</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <h1>edit</h1>
-</ion-content>
+<ion-split-pane
+  contentId="menu-content"
+  when="lg"
+  class="split-pane"
+  (ionSplitPaneVisible)="onSplitPaneVisible($event)"
+>
+  <ion-menu
+    contentId="menu-content"
+    menuId="menu-content"
+    side="start"
+    class="left-menu"
+    type="overlay"
+  >
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>onSplitPaneVisible</ion-title>
+        <ion-buttons slot="start">
+          <ion-menu-button menu="menu-content"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <nd-note-cards
+        [activeNoteId]="activeNoteId"
+        (edit)="onEditNote($event)"
+      ></nd-note-cards>
+    </ion-content>
+  </ion-menu>
+  <ion-menu contentId="menu-content" menuId="menu-content2" side="end">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Info</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-card>
+        <ion-note>30 characters</ion-note>
+        <ion-note>20 words</ion-note>
+      </ion-card>
+      <h2>pages</h2>
+      <nd-note-page-cards></nd-note-page-cards>
+    </ion-content>
+  </ion-menu>
+  <ion-content id="menu-content" fullscreen="true" class="note-area">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button mode="md" menu="menu-content"></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-menu-button mode="md" menu="menu-content2"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <div class="flex flex-col flex-1 h-full">
+      <nd-note-title-input
+        [title]="noteToEdit?.title"
+        [noteId]="noteToEdit?.id"
+      ></nd-note-title-input>
+      <nd-note-content-input
+        [content]="noteToEdit?.pages[0]?.content"
+        [noteId]="noteToEdit?.id"
+        [notePageId]="noteToEdit?.pages[0]?.id"
+        class="flex-grow h-full"
+      ></nd-note-content-input>
+    </div>
+  </ion-content>
+</ion-split-pane>
