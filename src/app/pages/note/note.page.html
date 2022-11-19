@@ -1,9 +1,51 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>note</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-split-pane
+  contentId="menu-content"
+  when="lg"
+  class="split-pane"
+  (ionSplitPaneVisible)="onSplitPaneVisible($event)"
+>
+  <ion-menu
+    contentId="menu-content"
+    menuId="menu-content"
+    side="start"
+    class="left-menu"
+    type="overlay"
+  >
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>onSplitPaneVisible</ion-title>
+        <ion-buttons slot="start">
+          <ion-menu-button menu="menu-content"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <nd-note-cards></nd-note-cards>
+    </ion-content>
+  </ion-menu>
+  <ion-menu contentId="menu-content" menuId="menu-content2" side="end">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Pages</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content> <nd-note-page-cards></nd-note-page-cards> </ion-content>
+  </ion-menu>
+  <ion-content id="menu-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>home</ion-title>
+        <ion-buttons slot="start">
+          <ion-menu-button mode="md" menu="menu-content"></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-menu-button mode="md" menu="menu-content2"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <div class="flex flex-cl">
+      <nd-note-title-input></nd-note-title-input>
+      <nd-note-content-input></nd-note-content-input>
+    </div>
+  </ion-content>
+</ion-split-pane>
