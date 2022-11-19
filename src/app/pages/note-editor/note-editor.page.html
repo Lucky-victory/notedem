@@ -21,6 +21,7 @@
     </ion-header>
     <ion-content>
       <nd-note-cards
+        [canNavigate]="true"
         [activeNoteId]="activeNoteId"
         (edit)="onEditNote($event)"
       ></nd-note-cards>
