@@ -10,7 +10,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'edit/:note_id',
+    path: 'edit',
     loadChildren: () =>
       import('../note-editor/note-editor.module').then(
         (m) => m.NoteEditorPageModule

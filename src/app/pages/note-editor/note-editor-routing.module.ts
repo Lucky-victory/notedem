@@ -6,8 +6,11 @@ import { NoteEditorPage } from './note-editor.page';
 const routes: Routes = [
   {
     path: '',
-    component: NoteEditorPage
-  }
+    loadChildren: () =>
+      import('../note-editor/note-editor.module').then(
+        (m) => m.NoteEditorPageModule
+      ),
+  },
 ];
 
 @NgModule({

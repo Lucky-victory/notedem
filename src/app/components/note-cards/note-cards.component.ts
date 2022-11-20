@@ -42,7 +42,7 @@ export class NoteCardsComponent implements OnInit {
   ngOnInit(): void {}
   onEdit(note: INote) {
     if (this.canNavigate) {
-      this.navCtrl.navigateForward(`/notes/edit/${note?.id}`, {
+      this.router.navigate(['/notes/edit'], {
         state: note,
 
         queryParams: {
@@ -52,13 +52,13 @@ export class NoteCardsComponent implements OnInit {
 
       return;
     }
-    const tre = this.router.createUrlTree(['/notes', note?.id], {
-      queryParams: { chapter: note?.pages[0]?.id },
-    });
-    const rouState = this.router.routerState;
-    console.log({ rouState });
+    // const tre = this.router.createUrlTree(['/notes', note?.id], {
+    //   queryParams: { chapter: note?.pages[0]?.id },
+    // });
+    // const rouState = this.router.routerState;
+    // console.log({ rouState });
 
-    console.log(tre, 'From cards');
+    // console.log(tre, 'From cards');
     this.edit.emit(note);
   }
 }

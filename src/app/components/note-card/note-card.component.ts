@@ -33,7 +33,6 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.activeNoteId = this.route.snapshot.paramMap.get('note_id');
     this.isActive = this.note?.id === this.activeNoteId;
-    console.log(this.isActive, 'is active');
   }
   ngAfterViewInit(): void {
     const cardElems = this.noteCards.toArray();
@@ -41,7 +40,7 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
     const cardEl = cardElems.find(
       (el) => el.nativeElement.id === this.activeNoteId
     );
-    console.log({ card: cardEl });
+
     if (cardEl) {
       cardEl.nativeElement.scrollTo({
         top: 100,

@@ -1,6 +1,7 @@
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'nd-note-title-input',
@@ -16,5 +17,8 @@ export class NoteTitleInputComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.noteId);
+  }
+  updateTitle() {
+    distinctUntilChanged(() => true);
   }
 }
