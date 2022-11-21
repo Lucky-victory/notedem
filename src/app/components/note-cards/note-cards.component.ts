@@ -25,9 +25,44 @@ export class NoteCardsComponent implements OnInit {
       title: `Title ${i}`,
       pages: [
         {
-          id: `page_${i}`,
+          id: 'page_0',
           content:
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem dolore error amet volupperferendis! Officiis!',
+            ' content for page Lorem ipsum dolor sit, amet cons… elit. Maiores quis, molestiae, at eius amet qua1',
+        },
+        {
+          id: 'page_1',
+          content:
+            ' content for page Lorem ipsum dolor sit, amet cons… elit. Maiores quis, molestiae, at eius amet qua2',
+        },
+        {
+          id: 'page_2',
+          content:
+            ' content for page Lorem ipsum dolor sit, amet cons… elit. Maiores quis, molestiae, at eius amet qua3',
+        },
+        {
+          id: 'page_3',
+          content:
+            ' content for page Lorem ipsum dolor sit, amet cons… elit. Maiores quis, molestiae, at eius amet qua4',
+        },
+        {
+          id: 'page_4',
+          content:
+            ' content for page Lorem ipsum dolor sit, amet cons… elit. Maiores quis, molestiae, at eius amet qua5',
+        },
+        {
+          id: 'page_5',
+          content:
+            ' content for page Lorem ipsum dolor sit, amet cons… elit. Maiores quis, molestiae, at eius amet qua6',
+        },
+        {
+          id: 'page_6',
+          content:
+            ' content for page Lorem ipsum dolor sit, amet cons… elit. Maiores quis, molestiae, at eius amet qua7',
+        },
+        {
+          id: 'page_7',
+          content:
+            ' content for page Lorem ipsum dolor sit, amet cons… elit. Maiores quis, molestiae, at eius amet qua8',
         },
       ],
     }))

@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { INote } from 'src/app/interfaces/notes.interface';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 import { ShortenPipe } from 'src/app/pipes/shorten/shorten.pipe';
 
 @Component({
@@ -27,18 +27,16 @@ import { ShortenPipe } from 'src/app/pipes/shorten/shorten.pipe';
 export class NoteCardComponent implements OnInit, AfterViewInit {
   @Output() edit = new EventEmitter<INote>();
   @Input() note: INote;
-  @Input() isActive: boolean;
-  @Input() isActive$ = new BehaviorSubject(false);
   @Input() activeNoteId: string;
   @ViewChildren('noteCard') noteCards: QueryList<ElementRef<HTMLDivElement>>;
-  active = this.isActive$.asObservable();
+  active = of(false);
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((queryParam) => {
       this.activeNoteId = queryParam.get('note');
-      this.isActive$.next(this.note?.id === this.activeNoteId);
+      this.active = of(this.note?.id === this.activeNoteId);
     });
   }
   ngAfterViewInit(): void {

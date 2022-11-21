@@ -1,9 +1,4 @@
-<ion-split-pane
-  contentId="menu-content"
-  when="lg"
-  class="split-pane"
-  (ionSplitPaneVisible)="onSplitPaneVisible($event)"
->
+<ion-split-pane contentId="menu-content" when="lg" class="split-pane">
   <ion-menu
     contentId="menu-content"
     menuId="menu-content"
@@ -20,7 +15,8 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <nd-note-cards (edit)="onEditNote($event)"></nd-note-cards>
+      <h2>pages</h2>
+      <nd-note-page-cards (editPage)="onPageEdit(page)"></nd-note-page-cards>
     </ion-content>
   </ion-menu>
   <ion-menu contentId="menu-content" menuId="menu-content2" side="end">
@@ -34,8 +30,6 @@
         <ion-note>30 characters</ion-note>
         <ion-note>20 words</ion-note>
       </ion-card>
-      <h2>pages</h2>
-      <nd-note-page-cards></nd-note-page-cards>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="menu-content">
@@ -56,9 +50,9 @@
           [noteId]="noteToEdit?.id"
         ></nd-note-title-input>
         <nd-note-content-input
-          [content]="noteToEdit?.pages[0]?.content"
-          [noteId]="noteToEdit?.id"
-          [notePageId]="noteToEdit?.pages[0]?.id"
+          [content]="pageToEdit?.content"
+          [noteId]="activeNoteId"
+          [notePageId]="pageToEdit?.id"
           class="flex-grow h-full"
         ></nd-note-content-input>
       </div>
