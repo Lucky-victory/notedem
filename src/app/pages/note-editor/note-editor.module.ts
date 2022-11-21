@@ -11,6 +11,7 @@ import { NoteCardsComponent } from 'src/app/components/note-cards/note-cards.com
 import { NotePageCardsComponent } from 'src/app/components/note-page-cards/note-page-cards.component';
 import { NoteTitleInputComponent } from 'src/app/components/note-title-input/note-title-input.component';
 import { NoteContentInputComponent } from 'src/app/components/note-content-input/note-content-input.component';
+import { WordCharacterCounterPipe } from 'src/app/pipes/word-character-counter/word-character-counter.pipe';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { NoteContentInputComponent } from 'src/app/components/note-content-input
     NotePageCardsComponent,
     NoteTitleInputComponent,
     NoteContentInputComponent,
+    WordCharacterCounterPipe,
   ],
   declarations: [NoteEditorPage],
 })

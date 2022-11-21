@@ -27,8 +27,15 @@
     </ion-header>
     <ion-content>
       <ion-card>
-        <ion-note>30 characters</ion-note>
-        <ion-note>20 words</ion-note>
+        <p>Last updated at: {{noteToEdit?.updated_at|date:'short'}}</p>
+        <p>Created on: {{noteToEdit?.created_at|date:'short'}}</p>
+        <ion-note>{{contents|wordCharacterCounter:false}} characters</ion-note>
+        <ion-note>{{contents|wordCharacterCounter}} words</ion-note>
+      </ion-card>
+
+      <ion-card-subtitle class="uppercase">Current Page</ion-card-subtitle>
+      <ion-card>
+        <div class="wrapper"></div>
       </ion-card>
     </ion-content>
   </ion-menu>
@@ -37,10 +44,10 @@
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-menu-button mode="md" menu="menu-content"></ion-menu-button>
+            <ion-menu-button mode="md" menu="menu-content"> </ion-menu-button>
           </ion-buttons>
           <ion-buttons slot="end">
-            <ion-menu-button mode="md" menu="menu-content2"></ion-menu-button>
+            <ion-menu-button mode="md" menu="menu-content2"> </ion-menu-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>

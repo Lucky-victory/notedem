@@ -1,14 +1,7 @@
 import { NotePageCardComponent } from './../note-page-card/note-page-card.component';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  Renderer2,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { INotePage } from 'src/app/interfaces/notes.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -27,23 +20,19 @@ export class NotePageCardsComponent implements OnInit {
       page,
   }));
   @Output() editPage = new EventEmitter<INotePage>();
-  constructor(
-    private render: Renderer2,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    console.log(this.pages);
-  }
+  ngOnInit() {}
   onEdit(page: INotePage) {
     console.log({ page });
+
     this.router.navigate(['/notes/edit'], {
       relativeTo: this.route,
       queryParams: {
         page: page?.id,
       },
       queryParamsHandling: 'merge',
+      replaceUrl: true,
     });
     this.editPage.emit(page);
   }

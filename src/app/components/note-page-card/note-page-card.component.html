@@ -17,6 +17,9 @@
     </button>
   </div>
   <span class="text-xs text-gray-400 uppercase">page {{ pageIndex + 1 }}</span>
+
+  {{ page?.content | wordCharacterCounter }} words
+  {{ page?.content | wordCharacterCounter: false }} characters
   <p class="my-3">
     {{ page?.content | shorten }}
   </p>

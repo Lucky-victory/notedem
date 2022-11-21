@@ -4,6 +4,17 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <div class="wrapper max-w-lg m-auto py-4">
+    <ion-segment value="notes" (ionChange)="segmentChanged($event)" mode="ios">
+      <ion-segment-button value="notes">
+        <ion-label>Notes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="todos">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
   <nd-note-cards
     [canNavigate]="true"
     (edit)="onEditNote($event)"

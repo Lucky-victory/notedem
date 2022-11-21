@@ -16,4 +16,7 @@ export class NotePage implements OnInit {
   onEditNote(note: INote) {
     this.noteToEdit = note;
   }
+  segmentChanged(event){
+    
+  }
 }

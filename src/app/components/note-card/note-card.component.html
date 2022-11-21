@@ -1,6 +1,6 @@
 <div
   tabindex="1"
-  class="max-w-full p-4 pt-9 w-80 max-h-60 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden text-ellipsis note-card relative"
+  class="max-w-full p-4 pt-9 w-80 md:w-96 max-h-72 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden text-ellipsis note-card relative"
   [ngClass]="{ 'active-card': active | async }"
   #noteCard
   [id]="note?.id"
@@ -16,9 +16,11 @@
       <ion-icon slot="icon-only" name="pencil"></ion-icon>
     </button>
   </div>
-  <h2 class="text-xl mb-2 font-semibold">{{ note?.title }}</h2>
+  <h2 class="text-xl mb-2 font-semibold note-title">
+    {{ note?.title | shorten: 50 }}
+  </h2>
   <p class="my-3">
-    {{ note?.pages[0]?.content|shorten }}
+    {{ note?.pages[0]?.content | shorten }}
   </p>
   <div
     class="flex items-center justify-between border-t-2 border-gray-300 dark:border-gray-600"
