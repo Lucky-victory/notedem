@@ -38,13 +38,13 @@ export class NotePageCardsComponent implements OnInit {
   }
   onEdit(page: INotePage) {
     console.log({ page });
+    this.router.navigate(['/notes/edit'], {
+      relativeTo: this.route,
+      queryParams: {
+        page: page?.id,
+      },
+      queryParamsHandling: 'merge',
+    });
     this.editPage.emit(page);
-    // this.router.navigate(['/notes/edit'], {
-    //   relativeTo: this.route,
-    //   queryParams: {
-    //     page: page?.id,
-    //   },
-    //   queryParamsHandling: 'merge',
-    // });
   }
 }

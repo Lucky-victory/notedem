@@ -16,6 +16,10 @@ export class NoteContentInputComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.content);
+    console.log({
+      content: this.content,
+      noteId: this.noteId,
+      pageId: this.notePageId,
+    });
   }
 }

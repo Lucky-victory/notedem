@@ -2,4 +2,7 @@
   placeholder="Note..."
   class="flex-grow text-base h-full bg-transparent w-full resize-none border-none outline-none"
   [value]="content"
+  [attr.data-note-id]="noteId"
+  [attr.data-page-id]="notePageId"
+  [attr.data-content]="content"
 ></textarea>
