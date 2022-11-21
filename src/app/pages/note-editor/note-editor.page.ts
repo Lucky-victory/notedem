@@ -17,10 +17,9 @@ export class NoteEditorPage implements OnInit {
   ngOnInit() {
     const noteInState = this.router.getCurrentNavigation().extras
       .state as INote;
-    this.activeNoteId =
-      this.router.getCurrentNavigation().extras.queryParams?.chapter;
+    console.log({ noteInState });
+
     this.noteToEdit = noteInState;
-    this.activeNoteId = noteInState?.id;
   }
   onSplitPaneVisible(event) {}
 

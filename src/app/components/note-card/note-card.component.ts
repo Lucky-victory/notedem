@@ -14,25 +14,32 @@ import {
 } from '@angular/core';
 import { INote } from 'src/app/interfaces/notes.interface';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { ShortenPipe } from 'src/app/pipes/shorten/shorten.pipe';
 
 @Component({
   selector: 'nd-note-card',
   templateUrl: './note-card.component.html',
   styleUrls: ['./note-card.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, ShortenPipe],
 })
 export class NoteCardComponent implements OnInit, AfterViewInit {
   @Output() edit = new EventEmitter<INote>();
   @Input() note: INote;
   @Input() isActive: boolean;
+  @Input() isActive$ = new BehaviorSubject(false);
   @Input() activeNoteId: string;
   @ViewChildren('noteCard') noteCards: QueryList<ElementRef<HTMLDivElement>>;
+  active = this.isActive$.asObservable();
+
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.activeNoteId = this.route.snapshot.paramMap.get('note_id');
-    this.isActive = this.note?.id === this.activeNoteId;
+    this.route.queryParamMap.subscribe((queryParam) => {
+      this.activeNoteId = queryParam.get('note');
+      this.isActive$.next(this.note?.id === this.activeNoteId);
+    });
   }
   ngAfterViewInit(): void {
     const cardElems = this.noteCards.toArray();
@@ -40,18 +47,13 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
     const cardEl = cardElems.find(
       (el) => el.nativeElement.id === this.activeNoteId
     );
-
-    if (cardEl) {
-      cardEl.nativeElement.scrollTo({
-        top: 100,
-        left: 100,
-        behavior: 'smooth',
-      });
-    }
   }
   onEdit(note) {
     console.log(note);
 
     this.edit.emit(note);
+  }
+  limitText(text: string, limit = 30) {
+    return text.length > limit ? text.substring(0, limit) + '...' : text;
   }
 }

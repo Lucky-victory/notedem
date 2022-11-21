@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./note-cards.component.scss'],
 })
 export class NoteCardsComponent implements OnInit {
-  @Input() canNavigate: boolean;
+  @Input() canNavigate = true;
   @Input() activeNoteId: string;
   @Input() notes: Observable<INote[]> = of(
     [1, 2, 3, 1, 1, 1, 1, 1].map((_, i) => ({
@@ -44,21 +44,14 @@ export class NoteCardsComponent implements OnInit {
     if (this.canNavigate) {
       this.router.navigate(['/notes/edit'], {
         state: note,
-
+        relativeTo: this.route,
         queryParams: {
-          chapter: note?.pages[0]?.id,
+          note: note?.id,
+          page: note?.pages[0]?.id,
         },
       });
-
-      return;
     }
-    // const tre = this.router.createUrlTree(['/notes', note?.id], {
-    //   queryParams: { chapter: note?.pages[0]?.id },
-    // });
-    // const rouState = this.router.routerState;
-    // console.log({ rouState });
 
-    // console.log(tre, 'From cards');
     this.edit.emit(note);
   }
 }

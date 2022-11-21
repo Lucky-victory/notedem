@@ -4,8 +4,14 @@
   border-radius: 8px;
   &.active-card {
     border-bottom: 4px solid var(--orange);
+    &:hover {
+      .note-card-overlay {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
   }
-  &:not(.active-card):hover {
+  &:hover {
     .note-card-overlay {
       opacity: 1;
     }
@@ -14,6 +20,7 @@
     border-radius: inherit;
     border-color: var(--orange);
     opacity: 0;
+    pointer-events: auto;
     transition: opacity 0.4s ease-in-out;
     .edit-button {
       background-color: var(--orange);

@@ -17,7 +17,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'view/:note_id',
+    path: 'view',
     loadChildren: () =>
       import('../note-view/note-view.module').then((m) => m.NoteViewPageModule),
   },

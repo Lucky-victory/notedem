@@ -20,11 +20,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <nd-note-cards
-        [canNavigate]="true"
-        [activeNoteId]="activeNoteId"
-        (edit)="onEditNote($event)"
-      ></nd-note-cards>
+      <nd-note-cards (edit)="onEditNote($event)"></nd-note-cards>
     </ion-content>
   </ion-menu>
   <ion-menu contentId="menu-content" menuId="menu-content2" side="end">
