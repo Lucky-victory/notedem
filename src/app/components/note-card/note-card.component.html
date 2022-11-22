@@ -1,6 +1,6 @@
 <div
   tabindex="1"
-  class="ion-activatable max-w-full p-4 pt-9 w-80 md:w-96 max-h-72 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden text-ellipsis note-card relative"
+  class="ion-activatable max-w-full p-4 pt-5 sm:pt-9 w-80 md:w-96 max-h-72 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden text-ellipsis note-card relative"
   [ngClass]="{ 'active-card': active | async }"
   #noteCard
   [id]="note?.id"
@@ -19,7 +19,11 @@
       <ion-icon slot="icon-only" name="pencil"></ion-icon>
     </button>
   </div>
-  <h2 class="text-xl mb-2 font-semibold note-title">
+  <span class="uppercase text-sm text-gray-500 mb-4">
+
+    {{note?.category}}
+  </span>
+  <h2 class="text-xl mb-2 mt-2 font-semibold note-title">
     {{ note?.title | shorten: 50 }}
   </h2>
   <p class="my-3">
@@ -29,10 +33,9 @@
     class="flex items-center justify-between border-t-2 border-gray-300 dark:border-gray-600"
   >
     <div class="note-tags-wrapper text-xs py-3 text-gray-600">
-      <span class="note-tag bg-orange-300"> Success </span>
+      <span class="note-tag bg-orange-300" *ngFor="let tag of note?.tags"> {{tag}}</span>
 
-      <span class="note-tag px-1 bg-orange-300"> Victory </span>
-      <span class="note-tag px-1 bg-orange-300"> Victory </span>
+      
     </div>
     <strong class="text-xs text-gray-400">{{ note?.created_at | date }}</strong>
   </div>

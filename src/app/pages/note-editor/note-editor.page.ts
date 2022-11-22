@@ -20,6 +20,8 @@ export class NoteEditorPage implements OnInit {
     updated_at: new Date(166456786436).getTime(),
     user_id: '1',
     title: `Title ${i}`,
+    tags: ['first', 'second', 'third'],
+    category:`Category ${i+1}`,
     pages: [
       {
         id: 'page_0',

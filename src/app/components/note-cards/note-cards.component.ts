@@ -23,6 +23,8 @@ export class NoteCardsComponent implements OnInit {
       created_at: new Date(166456786436).getTime(),
       updated_at: new Date(166456786436).getTime(),
       user_id: '1',
+      tags: ['first', 'second', 'third'],
+    category:`Category ${i+1}`,
       title: `Title ${i}`,
       pages: [
         {

@@ -10,8 +10,14 @@
       <ion-toolbar>
         <ion-title>Pages </ion-title>
         <ion-buttons slot="start">
-          <ion-menu-button mode="md" menu="menu-content"></ion-menu-button>
+          <ion-menu-button mode="md" menu="menu-content">
+<ion-icon name="book"></ion-icon>
+
+          </ion-menu-button>
+          
+          
         </ion-buttons>
+        <ion-back-button ></ion-back-button>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -35,7 +41,7 @@
         <ul class="list-none py-4 mt-4 px-1 shadow-sm rounded-sm">
           <li class="flex items-center mb-2 text-sm">
             <span class="text-gray-400 flex items-center">
-              <ion-icon name="time" class="mr-1"></ion-icon>
+              <ion-icon ios="time-outline" name="time" class="mr-1"></ion-icon>
               Last updated:
             </span>
             <span class="text-current ml-2">
@@ -45,7 +51,7 @@
 
           <li class="flex items-center mb-2 text-sm">
             <span class="text-gray-400 flex items-center">
-              <ion-icon name="time" class="mr-1"></ion-icon>
+              <ion-icon name="time" ios="time-outline" class="mr-1"></ion-icon>
               Created on:
             </span>
             <span class="text-current ml-2">
@@ -54,7 +60,7 @@
           </li>
           <li class="flex items-center mb-2 text-sm">
             <span class="text-gray-400 flex items-center">
-              <ion-icon name="book" class="mr-1"></ion-icon>
+              <ion-icon name="document-text" ios="document-text-outline" class="mr-1"></ion-icon>
               Characters:
             </span>
             <span class="text-current ml-2">
@@ -64,7 +70,7 @@
 
           <li class="flex items-center mb-2 text-sm">
             <span class="text-gray-400 flex items-center">
-              <ion-icon name="newspaper" class="mr-1"></ion-icon>
+              <ion-icon name="newspaper" ios="newspaper-outline" class="mr-1"></ion-icon>
               Words:
             </span>
             <span class="text-current ml-2">
@@ -76,7 +82,7 @@
         <ul class="list-none pb-4 pt-2 mt-2 px-1 shadow-sm rounded-sm">
           <li class="flex items-center mb-2 text-sm">
             <span class="text-gray-400 flex items-center">
-              <ion-icon name="book" class="mr-1"></ion-icon>
+              <ion-icon name="document-text" ios="document-text-outline" class="mr-1"></ion-icon>
               Characters:
             </span>
             <span class="text-current ml-2">
@@ -86,7 +92,7 @@
 
           <li class="flex items-center mb-2 text-sm">
             <span class="text-gray-400 flex items-center">
-              <ion-icon name="newspaper" class="mr-1"></ion-icon>
+              <ion-icon name="newspaper" ios="newspaper-outline" class="mr-1"></ion-icon>
               Words:
             </span>
             <span class="text-current ml-2">
@@ -102,10 +108,14 @@
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-menu-button mode="md" menu="menu-content"> </ion-menu-button>
+            <ion-menu-button mode="md" menu="menu-content">
+            <ion-icon name="book" ios="book-outline"></ion-icon>  
+            </ion-menu-button>
           </ion-buttons>
           <ion-buttons slot="end">
-            <ion-menu-button mode="md" menu="menu-content2"> </ion-menu-button>
+            <ion-menu-button mode="md" menu="menu-content2">
+            <ion-icon name="alert-circle" ios="alert-circle-outline"></ion-icon>  
+            </ion-menu-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
