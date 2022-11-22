@@ -10,12 +10,12 @@
       <ion-toolbar>
         <ion-title>onSplitPaneVisible</ion-title>
         <ion-buttons slot="start">
-          <ion-menu-button menu="menu-content"></ion-menu-button>
+          <ion-menu-button mode="md" menu="menu-content"></ion-menu-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <h2>pages</h2>
+      <h2 class="text-center mt-4 mb-2 uppercase text-slate-400">pages</h2>
       <nd-note-page-cards (editPage)="onPageEdit($event)"></nd-note-page-cards>
     </ion-content>
   </ion-menu>
@@ -26,17 +26,70 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-card>
-        <p>Last updated at: {{noteToEdit?.updated_at|date:'short'}}</p>
-        <p>Created on: {{noteToEdit?.created_at|date:'short'}}</p>
-        <ion-note>{{contents|wordCharacterCounter:false}} characters</ion-note>
-        <ion-note>{{contents|wordCharacterCounter}} words</ion-note>
-      </ion-card>
+      <div class="p-5 max-sm:p-4 h-full dark:bg-slate-800">
+        <ul class="list-none py-4 mt-4 px-1 shadow-sm rounded-sm">
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="time" class="mr-1"></ion-icon>
+              Last updated:
+            </span>
+            <span class="text-current ml-2">
+              {{noteToEdit?.updated_at|date:'short'}}
+            </span>
+          </li>
 
-      <ion-card-subtitle class="uppercase">Current Page</ion-card-subtitle>
-      <ion-card>
-        <div class="wrapper"></div>
-      </ion-card>
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="time" class="mr-1"></ion-icon>
+              Created on:
+            </span>
+            <span class="text-current ml-2">
+              {{noteToEdit?.created_at|date:'short'}}
+            </span>
+          </li>
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="book" class="mr-1"></ion-icon>
+              Characters:
+            </span>
+            <span class="text-current ml-2">
+              {{contents|wordCharacterCounter:false}}
+            </span>
+          </li>
+
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="newspaper" class="mr-1"></ion-icon>
+              Words:
+            </span>
+            <span class="text-current ml-2">
+              {{contents|wordCharacterCounter}}
+            </span>
+          </li>
+        </ul>
+        <h2 class="capitalize text-lg text-gray-400 mt-4 mb-2">Current Page</h2>
+        <ul class="list-none pb-4 pt-2 mt-2 px-1 shadow-sm rounded-sm">
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="book" class="mr-1"></ion-icon>
+              Characters:
+            </span>
+            <span class="text-current ml-2">
+              {{pageToEdit?.content|wordCharacterCounter:false}}
+            </span>
+          </li>
+
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="newspaper" class="mr-1"></ion-icon>
+              Words:
+            </span>
+            <span class="text-current ml-2">
+              {{pageToEdit?.content|wordCharacterCounter}}
+            </span>
+          </li>
+        </ul>
+      </div>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="menu-content">
