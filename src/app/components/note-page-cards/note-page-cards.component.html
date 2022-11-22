@@ -1,3 +1,8 @@
-<p>note-page-cards works!</p>
-
-<nd-note-page-card></nd-note-page-card>
+<div class="flex gap-4 flex-col px-3 pt-5 pb-7 page-cards-container">
+  <nd-note-page-card
+    *ngFor="let page of pages; let i = index"
+    [page]="page"
+    [pageIndex]="i"
+    (editPage)="onEdit($event)"
+  ></nd-note-page-card>
+</div>

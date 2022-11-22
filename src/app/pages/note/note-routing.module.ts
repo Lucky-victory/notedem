@@ -10,14 +10,14 @@ const routes: Routes = [
   },
 
   {
-    path: 'edit/:note_id',
+    path: 'edit',
     loadChildren: () =>
       import('../note-editor/note-editor.module').then(
         (m) => m.NoteEditorPageModule
       ),
   },
   {
-    path: 'view/:note_id',
+    path: 'view',
     loadChildren: () =>
       import('../note-view/note-view.module').then((m) => m.NoteViewPageModule),
   },

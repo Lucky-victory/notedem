@@ -4,8 +4,14 @@
   border-radius: 8px;
   &.active-card {
     border-bottom: 4px solid var(--orange);
+    &:hover {
+      .note-card-overlay {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
   }
-  &:not(.active-card):hover {
+  &:hover {
     .note-card-overlay {
       opacity: 1;
     }
@@ -14,32 +20,9 @@
     border-radius: inherit;
     border-color: var(--orange);
     opacity: 0;
+    pointer-events: auto;
     transition: opacity 0.4s ease-in-out;
-    .edit-button {
-      background-color: var(--orange);
-      font-size: 1.125rem;
-
-      padding: 6px 14px;
-      &::before,
-      &::after {
-        position: absolute;
-        content: "";
-        width: 14px;
-        height: 14px;
-        background-color: transparent;
-        border-top-right-radius: 15px;
-      }
-      &::before {
-        left: -14px;
-        top: -2px;
-        box-shadow: 6px 0px 0 var(--orange);
-      }
-      &::after {
-        right: -2px;
-        bottom: -14px;
-        box-shadow: 0px -6px 0 var(--orange);
-      }
-    }
+   
   }
 }
 
@@ -52,3 +35,4 @@
     border-radius: 4px;
   }
 }
+

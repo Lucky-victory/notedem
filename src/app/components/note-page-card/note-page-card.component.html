@@ -1,3 +1,26 @@
-<p>
-  note-page-card works!
-</p>
+<div
+  tabindex="1"
+  class="ion-activatable max-w-full p-4 pt-6 w-80 max-h-60 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden card relative"
+  [ngClass]="{ 'active-card': active | async }"
+  #noteCard
+  [id]="page?.id"
+  (click)="onCardClick(page)"
+>
+<ion-ripple-effect class="ion-hide-sm-up"></ion-ripple-effect>
+  <div
+    class="card-overlay absolute inset-0 border-2 border-orange-500 rounded-lg text-right "
+  >
+    <button
+      (click)="onEdit(page)"
+      title="Edit Page"
+      class="ion-hide-sm-down card-button relative rounded-bl-lg edit-button outline-none border-none text-gray-50 bg-orange-500"
+    >
+      <ion-icon slot="icon-only" name="pencil"></ion-icon>
+    </button>
+  </div>
+  <span class="text-xs font-semibold text-gray-400 uppercase">page {{ pageIndex + 1 }}</span>
+
+  <p class="my-3">
+    {{ page?.content | shorten }}
+  </p>
+</div>

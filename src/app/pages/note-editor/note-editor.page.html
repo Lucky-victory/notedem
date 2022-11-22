@@ -1,9 +1,4 @@
-<ion-split-pane
-  contentId="menu-content"
-  when="lg"
-  class="split-pane"
-  (ionSplitPaneVisible)="onSplitPaneVisible($event)"
->
+<ion-split-pane contentId="menu-content" when="lg" class="split-pane">
   <ion-menu
     contentId="menu-content"
     menuId="menu-content"
@@ -13,57 +8,129 @@
   >
     <ion-header>
       <ion-toolbar>
-        <ion-title>onSplitPaneVisible</ion-title>
+        <ion-title>Pages </ion-title>
         <ion-buttons slot="start">
-          <ion-menu-button menu="menu-content"></ion-menu-button>
+          <ion-menu-button mode="md" menu="menu-content">
+<ion-icon name="book"></ion-icon>
+
+          </ion-menu-button>
+          
+          
         </ion-buttons>
+        <ion-back-button ></ion-back-button>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <nd-note-cards
-        [canNavigate]="true"
-        [activeNoteId]="activeNoteId"
-        (edit)="onEditNote($event)"
-      ></nd-note-cards>
+     <!-- <h2 class="text-center mt-4 mb-2 uppercase text-slate-400">pages</h2>-->
+      <nd-note-page-cards (editPage)="onPageEdit($event)"></nd-note-page-cards>
     </ion-content>
   </ion-menu>
   <ion-menu contentId="menu-content" menuId="menu-content2" side="end">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Info</ion-title>
+        <ion-title>
+      <span class="flex items-center">
+<ion-icon slot="start" name="alert-circle" class="mr-3"></ion-icon>
+        Info
+      </span>   
+        </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-card>
-        <ion-note>30 characters</ion-note>
-        <ion-note>20 words</ion-note>
-      </ion-card>
-      <h2>pages</h2>
-      <nd-note-page-cards></nd-note-page-cards>
+      <div class="p-5 max-sm:p-4 h-full dark:bg-slate-800">
+        <ul class="list-none py-4 mt-4 px-1 shadow-sm rounded-sm">
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon ios="time-outline" name="time" class="mr-1"></ion-icon>
+              Last updated:
+            </span>
+            <span class="text-current ml-2">
+              {{noteToEdit?.updated_at|date:'short'}}
+            </span>
+          </li>
+
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="time" ios="time-outline" class="mr-1"></ion-icon>
+              Created on:
+            </span>
+            <span class="text-current ml-2">
+              {{noteToEdit?.created_at|date:'short'}}
+            </span>
+          </li>
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="document-text" ios="document-text-outline" class="mr-1"></ion-icon>
+              Characters:
+            </span>
+            <span class="text-current ml-2">
+              {{contents|wordCharacterCounter:false}}
+            </span>
+          </li>
+
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="newspaper" ios="newspaper-outline" class="mr-1"></ion-icon>
+              Words:
+            </span>
+            <span class="text-current ml-2">
+              {{contents|wordCharacterCounter}}
+            </span>
+          </li>
+        </ul>
+        <h2 class="capitalize text-lg text-gray-400 mt-4 mb-2">Current Page</h2>
+        <ul class="list-none pb-4 pt-2 mt-2 px-1 shadow-sm rounded-sm">
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="document-text" ios="document-text-outline" class="mr-1"></ion-icon>
+              Characters:
+            </span>
+            <span class="text-current ml-2">
+              {{pageToEdit?.content|wordCharacterCounter:false}}
+            </span>
+          </li>
+
+          <li class="flex items-center mb-2 text-sm">
+            <span class="text-gray-400 flex items-center">
+              <ion-icon name="newspaper" ios="newspaper-outline" class="mr-1"></ion-icon>
+              Words:
+            </span>
+            <span class="text-current ml-2">
+              {{pageToEdit?.content|wordCharacterCounter}}
+            </span>
+          </li>
+        </ul>
+      </div>
     </ion-content>
   </ion-menu>
-  <ion-content id="menu-content" fullscreen="true" class="note-area">
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button mode="md" menu="menu-content"></ion-menu-button>
-        </ion-buttons>
-        <ion-buttons slot="end">
-          <ion-menu-button mode="md" menu="menu-content2"></ion-menu-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <div class="flex flex-col flex-1 h-full">
-      <nd-note-title-input
-        [title]="noteToEdit?.title"
-        [noteId]="noteToEdit?.id"
-      ></nd-note-title-input>
-      <nd-note-content-input
-        [content]="noteToEdit?.pages[0]?.content"
-        [noteId]="noteToEdit?.id"
-        [notePageId]="noteToEdit?.pages[0]?.id"
-        class="flex-grow h-full"
-      ></nd-note-content-input>
-    </div>
-  </ion-content>
+  <ion-router-outlet id="menu-content">
+    <ion-content fullscreen="true" class="note-area">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button mode="md" menu="menu-content">
+            <ion-icon name="book" ios="book-outline"></ion-icon>  
+            </ion-menu-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-menu-button mode="md" menu="menu-content2">
+            <ion-icon name="alert-circle" ios="alert-circle-outline"></ion-icon>  
+            </ion-menu-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <div class="flex flex-col flex-1 h-full">
+        <nd-note-title-input
+          [title]="noteToEdit?.title"
+          [noteId]="noteToEdit?.id"
+        ></nd-note-title-input>
+        <nd-note-content-input
+          [content]="pageToEdit?.content"
+          [noteId]="activeNoteId"
+          [notePageId]="pageToEdit?.id"
+          class="flex-grow h-full"
+        ></nd-note-content-input>
+      </div>
+    </ion-content>
+  </ion-router-outlet>
 </ion-split-pane>

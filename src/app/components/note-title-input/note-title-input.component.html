@@ -4,6 +4,7 @@
     name="noteTitle"
     [value]="title"
     placeholder="Title"
-    class="placeholder:font-semibold bg-transparent border-0 border-b-2 border-gray-300 dark:border-gray-500 focus:border-0 text-xl font-semibold sm:text-lg"
+    class="placeholder:font-semibold bg-transparent border-0 border-b-2 border-gray-300 dark:border-gray-500 p-3 focus:border-0 text-xl block font-semibold sm:text-lg"
+    (keyup)="updateTitle(title)"
   ></ion-input>
 </div>

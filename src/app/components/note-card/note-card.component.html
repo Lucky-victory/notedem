@@ -1,33 +1,41 @@
 <div
   tabindex="1"
-  class="max-w-full p-4 pt-9 w-80 max-h-60 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden text-ellipsis note-card relative"
-  [ngClass]="{ 'active-card': isActive }"
+  class="ion-activatable max-w-full p-4 pt-5 sm:pt-9 w-80 md:w-96 max-h-72 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden text-ellipsis note-card relative"
+  [ngClass]="{ 'active-card': active | async }"
   #noteCard
   [id]="note?.id"
+
+  (click)="onCardClick(note)"
 >
+<ion-ripple-effect class="ion-hide-sm-up"></ion-ripple-effect>
   <div
     class="note-card-overlay absolute inset-0 border-2 border-orange-500 rounded-lg text-right"
   >
     <button
       (click)="onEdit(note)"
       title="Edit note"
-      class="note-card-button relative rounded-bl-lg edit-button outline-none border-none text-gray-50 bg-orange-500"
+      class="ion-hide-sm-down note-card-button relative rounded-bl-lg edit-button outline-none border-none text-gray-50 bg-orange-500"
     >
       <ion-icon slot="icon-only" name="pencil"></ion-icon>
     </button>
   </div>
-  <h2 class="text-xl mb-2 font-semibold">{{ note?.title }}</h2>
+  <span class="uppercase text-sm text-gray-500 mb-4">
+
+    {{note?.category}}
+  </span>
+  <h2 class="text-xl mb-2 mt-2 font-semibold note-title">
+    {{ note?.title | shorten: 50 }}
+  </h2>
   <p class="my-3">
-    {{ note?.pages[0]?.content }}
+    {{ note?.pages[0]?.content | shorten }}
   </p>
   <div
     class="flex items-center justify-between border-t-2 border-gray-300 dark:border-gray-600"
   >
     <div class="note-tags-wrapper text-xs py-3 text-gray-600">
-      <span class="note-tag bg-orange-300"> Success </span>
+      <span class="note-tag bg-orange-300" *ngFor="let tag of note?.tags"> {{tag}}</span>
 
-      <span class="note-tag px-1 bg-orange-300"> Victory </span>
-      <span class="note-tag px-1 bg-orange-300"> Victory </span>
+      
     </div>
     <strong class="text-xs text-gray-400">{{ note?.created_at | date }}</strong>
   </div>

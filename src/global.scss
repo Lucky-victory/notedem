@@ -8,7 +8,7 @@
  * For more information on global stylesheets, visit the documentation:
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 /* Core CSS required for Ionic components to work properly */
 @import "~@ionic/angular/css/core.css";
 
@@ -28,9 +28,62 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.divider-r {
-  display: inline-block;
-  width: 4px;
-  height: auto;
-  border-right-width: 2px;
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+.card {
+  --orange-rgb: 249 115 22;
+  --orange: #f97316;
+  border-radius: 8px;
+  transition: 0.5s ease-in-out;
+  &.active-card {
+    border-left: 4px solid var(--orange);
+    ion-ripple-effect{
+      visibility: hidden;
+      transition: visibility 0.5s ease-out;
+    }
+    &:hover {
+      .card-overlay {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
+  &:hover {
+    .card-overlay {
+      opacity: 1;
+    }
+  }
+  .card-overlay {
+    border-radius: inherit;
+    border-color: var(--orange);
+    opacity: 0;
+    pointer-events: auto;
+    transition: opacity 0.7s ease-in-out;
+  }
+}
+.edit-button {
+  background-color: var(--orange);
+  font-size: 1.125rem;
+
+  padding: 0.375rem 0.875rem;
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    width: 14px;
+    height: 14px;
+    background-color: transparent;
+    border-top-right-radius: 15px;
+  }
+  &::before {
+    left: -14px;
+    top: -2px;
+    box-shadow: 6px 0px 0 var(--orange);
+  }
+  &::after {
+    right: -2px;
+    bottom: -14px;
+    box-shadow: 0px -6px 0 var(--orange);
+  }
 }
