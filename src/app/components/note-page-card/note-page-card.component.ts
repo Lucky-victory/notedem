@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, Platform } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { of } from 'rxjs';
@@ -19,9 +19,11 @@ export class NotePageCardComponent implements OnInit {
   @Input() page: INotePage;
   @Output() editPage = new EventEmitter<INotePage>();
   @Input() pageIndex: number;
-
+  isMobile: boolean;
   activePageId: string;
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private platform: Platform) {
+    this.isMobile = this.platform.is('mobile');
+  }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((queryParams) => {
@@ -31,5 +33,10 @@ export class NotePageCardComponent implements OnInit {
   }
   onEdit(page) {
     this.editPage.emit(page);
+  }
+  onCardClick(note) {
+    if (this.isMobile) {
+      this.onEdit(note)
+    }
   }
 }

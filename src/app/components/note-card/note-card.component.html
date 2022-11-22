@@ -1,17 +1,20 @@
 <div
   tabindex="1"
-  class="max-w-full p-4 pt-9 w-80 md:w-96 max-h-72 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden text-ellipsis note-card relative"
+  class="ion-activatable max-w-full p-4 pt-9 w-80 md:w-96 max-h-72 h-auto min-h-max shadow-md bg-gray-100 dark:bg-slate-800 rounded-lg overflow-hidden text-ellipsis note-card relative"
   [ngClass]="{ 'active-card': active | async }"
   #noteCard
   [id]="note?.id"
+
+  (click)="onCardClick(note)"
 >
+<ion-ripple-effect class="ion-hide-sm-up"></ion-ripple-effect>
   <div
     class="note-card-overlay absolute inset-0 border-2 border-orange-500 rounded-lg text-right"
   >
     <button
       (click)="onEdit(note)"
       title="Edit note"
-      class="note-card-button relative rounded-bl-lg edit-button outline-none border-none text-gray-50 bg-orange-500"
+      class="ion-hide-sm-down note-card-button relative rounded-bl-lg edit-button outline-none border-none text-gray-50 bg-orange-500"
     >
       <ion-icon slot="icon-only" name="pencil"></ion-icon>
     </button>

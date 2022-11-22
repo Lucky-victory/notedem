@@ -8,7 +8,7 @@
  * For more information on global stylesheets, visit the documentation:
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 /* Core CSS required for Ionic components to work properly */
 @import "~@ionic/angular/css/core.css";
 
@@ -28,12 +28,20 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+*{
+  font-family: 'Montserrat', sans-serif;
+}
 .card {
   --orange-rgb: 249 115 22;
   --orange: #f97316;
   border-radius: 8px;
+  transition: 0.5s ease-in-out;
   &.active-card {
     border-left: 4px solid var(--orange);
+    ion-ripple-effect{
+      visibility: hidden;
+      transition: visibility 0.5s ease-out;
+    }
     &:hover {
       .card-overlay {
         opacity: 0;
@@ -51,7 +59,7 @@
     border-color: var(--orange);
     opacity: 0;
     pointer-events: auto;
-    transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.7s ease-in-out;
   }
 }
 .edit-button {

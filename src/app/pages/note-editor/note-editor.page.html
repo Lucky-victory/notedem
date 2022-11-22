@@ -8,21 +8,26 @@
   >
     <ion-header>
       <ion-toolbar>
-        <ion-title>onSplitPaneVisible</ion-title>
+        <ion-title>Pages </ion-title>
         <ion-buttons slot="start">
           <ion-menu-button mode="md" menu="menu-content"></ion-menu-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <h2 class="text-center mt-4 mb-2 uppercase text-slate-400">pages</h2>
+     <!-- <h2 class="text-center mt-4 mb-2 uppercase text-slate-400">pages</h2>-->
       <nd-note-page-cards (editPage)="onPageEdit($event)"></nd-note-page-cards>
     </ion-content>
   </ion-menu>
   <ion-menu contentId="menu-content" menuId="menu-content2" side="end">
     <ion-header>
       <ion-toolbar>
-        <ion-title>Info</ion-title>
+        <ion-title>
+      <span class="flex items-center">
+<ion-icon slot="start" name="alert-circle" class="mr-3"></ion-icon>
+        Info
+      </span>   
+        </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>

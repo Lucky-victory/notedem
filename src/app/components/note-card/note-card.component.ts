@@ -1,4 +1,4 @@
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, Platform } from '@ionic/angular';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   Component,
@@ -30,8 +30,11 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
   @Input() activeNoteId: string;
   @ViewChildren('noteCard') noteCards: QueryList<ElementRef<HTMLDivElement>>;
   active = of(false);
-
-  constructor(private route: ActivatedRoute) {}
+  isMobile: boolean;
+  constructor(private route: ActivatedRoute, private platform: Platform) {
+    
+    this.isMobile=this.platform.is('mobile');
+  }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((queryParam) => {
@@ -53,5 +56,10 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
   }
   limitText(text: string, limit = 30) {
     return text.length > limit ? text.substring(0, limit) + '...' : text;
+  }
+  onCardClick(note) {
+    if (this.isMobile) {
+      this.onEdit(note)
+    }
   }
 }

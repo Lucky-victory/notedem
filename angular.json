@@ -152,7 +152,8 @@
     "schematicCollections": [
       "@ionic/angular-toolkit",
       "@ngrx/schematics"
-    ]
+    ],
+    "analytics": false
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
