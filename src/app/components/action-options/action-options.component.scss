@@ -1,0 +1,7 @@
+ion-button {
+  &.action-button {
+    &::part(native) {
+      --width: auto;
+    }
+  }
+}

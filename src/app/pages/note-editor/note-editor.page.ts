@@ -2,6 +2,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { INote, INotePage } from 'src/app/interfaces/notes.interface';
+import {
+  ActionSheetController,
+  ModalController,
+  Platform,
+  PopoverController,
+} from '@ionic/angular';
+import { ActionOptionsComponent } from 'src/app/components/action-options/action-options.component';
 
 @Component({
   selector: 'nd-note-editor',
@@ -21,7 +28,7 @@ export class NoteEditorPage implements OnInit {
     user_id: '1',
     title: `Title ${i}`,
     tags: ['first', 'second', 'third'],
-    category:`Category ${i+1}`,
+    category: `Category ${i + 1}`,
     pages: [
       {
         id: 'page_0',
@@ -67,13 +74,21 @@ export class NoteEditorPage implements OnInit {
   }));
 
   noteId: string;
-
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  isMobile: boolean;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private actionSheet: ActionSheetController,
+    private popoverCtrl: PopoverController,
+    private platform: Platform
+  ) {
+    this.isMobile = this.platform.is('mobile');
+    console.log({ url: this.platform.url() });
+  }
   get contents() {
     const contentsInNote = this.noteToEdit?.pages
       .map((page) => page?.content)
       .join(' ');
-    console.log({ contentsInNote });
 
     return contentsInNote;
   }
@@ -98,4 +113,45 @@ export class NoteEditorPage implements OnInit {
   onPageEdit(page) {
     this.pageToEdit = page;
   }
+  showModalOrPopover = async (event, note) => {
+    const opts = {
+      cssClass: 'nd-action-sheet',
+      buttons: [
+        {
+          text: 'Delete note',
+          role: 'destructive',
+          icon: 'trash',
+          handler: () => {
+            console.log('Delete clicked');
+          },
+        },
+
+        {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+      ],
+    };
+    if (this.isMobile) {
+      const sheet = await this.actionSheet.create(opts);
+      await sheet.present();
+      return;
+    }
+    const popover = await this.popoverCtrl.create({
+      component: ActionOptionsComponent,
+      cssClass: 'nd-action-popover',
+      event,
+      arrow: true,
+      dismissOnSelect: true,
+      componentProps: {
+        content: note,
+        buttons: opts.buttons,
+      },
+    });
+    await popover.present();
+  };
 }
