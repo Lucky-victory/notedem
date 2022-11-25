@@ -1,3 +1,10 @@
+<div class="flex items-center sticky top-0 z-10">
+  <ion-button class="new-page-button" title="Add new page">
+    <ion-icon slot="start" name="add" size="medium"></ion-icon>
+    <span class="capitalize">Add new page</span>
+  </ion-button>
+</div>
+
 <div class="flex gap-4 flex-col px-3 pt-5 pb-7 page-cards-container">
   <nd-note-page-card
     *ngFor="let page of pages; let i = index"

@@ -39,4 +39,7 @@ export class NotePageCardComponent implements OnInit {
       this.onEdit(note)
     }
   }
+  onDelete(page){
+
+  }
 }

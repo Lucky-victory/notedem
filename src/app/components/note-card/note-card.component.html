@@ -4,10 +4,9 @@
   [ngClass]="{ 'active-card': active | async }"
   #noteCard
   [id]="note?.id"
-
   (click)="onCardClick(note)"
 >
-<ion-ripple-effect class="ion-hide-sm-up"></ion-ripple-effect>
+  <ion-ripple-effect class="ion-hide-sm-up"></ion-ripple-effect>
   <div
     class="note-card-overlay absolute inset-0 border-2 border-orange-500 rounded-lg text-right"
   >
@@ -20,22 +19,21 @@
     </button>
   </div>
   <span class="uppercase text-sm text-gray-500 mb-4">
-
-    {{note?.category}}
+    {{ note?.category }}
   </span>
   <h2 class="text-xl mb-2 mt-2 font-semibold note-title">
     {{ note?.title | shorten: 50 }}
   </h2>
   <p class="my-3">
-    {{ note?.pages[0]?.content | shorten }}
+    {{ note?.pages && note.pages[0]?.content | shorten }}
   </p>
   <div
     class="flex items-center justify-between border-t-2 border-gray-300 dark:border-gray-600"
   >
     <div class="note-tags-wrapper text-xs py-3 text-gray-600">
-      <span class="note-tag bg-orange-300" *ngFor="let tag of note?.tags"> {{tag}}</span>
-
-      
+      <span class="note-tag bg-orange-300" *ngFor="let tag of note?.tags">
+        {{ tag }}</span
+      >
     </div>
     <strong class="text-xs text-gray-400">{{ note?.created_at | date }}</strong>
   </div>

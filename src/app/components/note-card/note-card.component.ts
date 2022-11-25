@@ -32,8 +32,7 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
   active = of(false);
   isMobile: boolean;
   constructor(private route: ActivatedRoute, private platform: Platform) {
-    
-    this.isMobile=this.platform.is('mobile');
+    this.isMobile = this.platform.is('mobile');
   }
 
   ngOnInit() {
@@ -43,11 +42,10 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
     });
   }
   ngAfterViewInit(): void {
-    const cardElems = this.noteCards.toArray();
-
-    const cardEl = cardElems.find(
-      (el) => el.nativeElement.id === this.activeNoteId
-    );
+    // const cardElems = this.noteCards.toArray();
+    // const cardEl = cardElems.find(
+    //   (el) => el.nativeElement.id === this.activeNoteId
+    // );
   }
   onEdit(note) {
     console.log(note);
@@ -59,7 +57,7 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
   }
   onCardClick(note) {
     if (this.isMobile) {
-      this.onEdit(note)
+      this.onEdit(note);
     }
   }
 }

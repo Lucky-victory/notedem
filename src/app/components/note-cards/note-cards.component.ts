@@ -17,57 +17,57 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NoteCardsComponent implements OnInit {
   @Input() canNavigate = true;
   @Input() activeNoteId: string;
-  @Input() notes: Observable<INote[]> = of(
+  @Input() notes: Observable<Partial<INote>[]> = of(
     [1, 2, 3, 1, 1, 1, 1, 1].map((_, i) => ({
       id: `note_${i}`,
       created_at: new Date(166456786436).getTime(),
       updated_at: new Date(166456786436).getTime(),
       user_id: '1',
       tags: ['first', 'second', 'third'],
-    category:`Category ${i+1}`,
+      category: `Category ${i + 1}`,
       title: `Title ${i}`,
-      pages: [
-        {
-          id: 'page_0',
-          content:
-            ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua1',
-        },
-        {
-          id: 'page_1',
-          content:
-            ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua2',
-        },
-        {
-          id: 'page_2',
-          content:
-            ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua3',
-        },
-        {
-          id: 'page_3',
-          content:
-            ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua4',
-        },
-        {
-          id: 'page_4',
-          content:
-            ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua5',
-        },
-        {
-          id: 'page_5',
-          content:
-            ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua6',
-        },
-        {
-          id: 'page_6',
-          content:
-            ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua7',
-        },
-        {
-          id: 'page_7',
-          content:
-            ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua8',
-        },
-      ],
+      // pages: [
+      //   {
+      //     id: 'page_0',
+      //     content:
+      //       ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua1',
+      //   },
+      //   {
+      //     id: 'page_1',
+      //     content:
+      //       ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua2',
+      //   },
+      //   {
+      //     id: 'page_2',
+      //     content:
+      //       ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua3',
+      //   },
+      //   {
+      //     id: 'page_3',
+      //     content:
+      //       ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua4',
+      //   },
+      //   {
+      //     id: 'page_4',
+      //     content:
+      //       ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua5',
+      //   },
+      //   {
+      //     id: 'page_5',
+      //     content:
+      //       ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua6',
+      //   },
+      //   {
+      //     id: 'page_6',
+      //     content:
+      //       ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua7',
+      //   },
+      //   {
+      //     id: 'page_7',
+      //     content:
+      //       ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua8',
+      //   },
+      // ],
     }))
   );
 
@@ -86,7 +86,7 @@ export class NoteCardsComponent implements OnInit {
         relativeTo: this.route,
         queryParams: {
           note: note?.id,
-          page: note?.pages[0]?.id,
+          page: note?.pages && note.pages[0]?.id,
         },
       });
     }

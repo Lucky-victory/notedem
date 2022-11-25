@@ -20,13 +20,14 @@
     (edit)="onEditNote($event)"
   ></nd-note-cards>
 
-  <div class="fab-container sm:right-1/2 sm:translate-x-1/2 fixed bottom-4 right-4">
+  <div class="fab-container fixed bottom-4 right-4">
     <button
       class="ion-activatable text-gray-100 relative button overflow-hidden cursor-pointer font-bold text-lg capitalize rounded-full px-4 py-3 outline-none border-none bg-orange-500 flex items-center shadow-lg"
+      title="Add a New Note"
     >
-      <ion-icon class=" mr-2 font-bold " size="large" name="add"></ion-icon>
+      <ion-icon class="mr-2 font-bold" size="large" name="add"></ion-icon>
       new note
-      <ion-ripple-effect ></ion-ripple-effect>
+      <ion-ripple-effect></ion-ripple-effect>
     </button>
   </div>
 </ion-content>

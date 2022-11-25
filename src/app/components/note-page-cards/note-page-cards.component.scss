@@ -1,0 +1,10 @@
+ion-button {
+  &.new-page-button {
+    margin: 1rem auto;
+    &::part(native) {
+      background-color: var(--orange);
+      color: #fff;
+      border-radius: 30px;
+    }
+  }
+}

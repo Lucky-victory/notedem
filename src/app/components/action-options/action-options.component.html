@@ -1,12 +1,13 @@
-<div class="buttons-container">
+<div class="buttons-container overflow-hidden py-2">
   <ion-buttons
-    class="flex flex-col items-start action-button-wrapper gap-3 text-sm py-3"
+    style="--width: 150px"
+    [part]="'hoooo'"
+    class="flex flex-col items-start action-button-wrapper gap-3 w-28 text-sm py-3"
   >
     <ion-button
       (click)="onButtonClick(button)"
       *ngFor="let button of buttons"
-      expand="block"
-      class="capitalize items-start justify-start action-button"
+      class="capitalize flex-grow action-button"
     >
       <ion-icon class="mr-4" [name]="button?.icon"></ion-icon>
       <ion-label>{{ button?.text }}</ion-label>

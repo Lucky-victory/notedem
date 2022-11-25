@@ -6,9 +6,9 @@
   [id]="page?.id"
   (click)="onCardClick(page)"
 >
-<ion-ripple-effect class="ion-hide-sm-up"></ion-ripple-effect>
+  <ion-ripple-effect class="ion-hide-sm-up"></ion-ripple-effect>
   <div
-    class="card-overlay absolute inset-0 border-2 border-orange-500 rounded-lg text-right "
+    class="card-overlay absolute inset-0 border-2 border-orange-500 rounded-lg text-right"
   >
     <button
       (click)="onEdit(page)"
@@ -17,8 +17,17 @@
     >
       <ion-icon slot="icon-only" name="pencil"></ion-icon>
     </button>
+    <button
+      (click)="onDelete(page)"
+      title="Delete Page"
+      class="ion-hide-sm-down card-delete-button relative rounded-tl-lg edit-button outline-none border-none text-gray-50 bg-red-500"
+    >
+      <ion-icon slot="icon-only" name="trash" ios="trash-outline"></ion-icon>
+    </button>
   </div>
-  <span class="text-xs font-semibold text-gray-400 uppercase">page {{ pageIndex + 1 }}</span>
+  <span class="text-xs font-semibold text-gray-400 uppercase"
+    >page {{ pageIndex + 1 }}</span
+  >
 
   <p class="my-3">
     {{ page?.content | shorten }}

@@ -29,48 +29,6 @@ export class NoteEditorPage implements OnInit {
     title: `Title ${i}`,
     tags: ['first', 'second', 'third'],
     category: `Category ${i + 1}`,
-    pages: [
-      {
-        id: 'page_0',
-        content:
-          ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua1',
-      },
-      {
-        id: 'page_1',
-        content:
-          ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua2',
-      },
-      {
-        id: 'page_2',
-        content:
-          ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua3',
-      },
-      {
-        id: 'page_3',
-        content:
-          ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua4',
-      },
-      {
-        id: 'page_4',
-        content:
-          ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua5',
-      },
-      {
-        id: 'page_5',
-        content:
-          ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua6',
-      },
-      {
-        id: 'page_6',
-        content:
-          ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua7',
-      },
-      {
-        id: 'page_7',
-        content:
-          ' content for page Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quis, molestiae, at eius amet qua8',
-      },
-    ],
   }));
 
   noteId: string;
@@ -87,26 +45,27 @@ export class NoteEditorPage implements OnInit {
   }
   get contents() {
     const contentsInNote = this.noteToEdit?.pages
-      .map((page) => page?.content)
+      ?.map((page) => page?.content)
       .join(' ');
 
     return contentsInNote;
   }
   ngOnInit() {
-    let noteInState = this.router.getCurrentNavigation().extras.state as INote;
+    const noteInState = this.router.getCurrentNavigation().extras
+      .state as INote;
     console.log({ noteInState });
     this.activeNoteId = noteInState?.id;
     this.noteToEdit = noteInState;
-    this.pageToEdit = noteInState?.pages[0];
+    this.pageToEdit = noteInState?.pages && noteInState.pages[0];
     if (!noteInState) {
       this.noteId = this.route.snapshot.queryParamMap.get('note');
 
-      setTimeout(() => {
-        noteInState = this.notes.find((note) => note?.id === this.noteId);
-        this.activeNoteId = noteInState?.id;
-        this.noteToEdit = noteInState;
-        this.pageToEdit = noteInState?.pages[0];
-      }, 3000);
+      // setTimeout(() => {
+      //   noteInState = this.notes.find((note) => note?.id === this.noteId);
+      //   this.activeNoteId = noteInState?.id;
+      //   this.noteToEdit = noteInState;
+      //   this.pageToEdit = noteInState?.pages[0];
+      // }, 3000);
     }
   }
 
@@ -123,15 +82,6 @@ export class NoteEditorPage implements OnInit {
           icon: 'trash',
           handler: () => {
             console.log('Delete clicked');
-          },
-        },
-
-        {
-          text: 'Cancel',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
           },
         },
       ],

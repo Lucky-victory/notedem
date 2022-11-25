@@ -42,4 +42,5 @@ export class HomePage implements OnInit {
     this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
   }
   onSplitPaneVisible(event) {}
+  segmentChanged(event) {}
 }

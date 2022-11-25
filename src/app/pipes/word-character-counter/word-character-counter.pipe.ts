@@ -9,9 +9,9 @@ export class WordCharacterCounterPipe implements PipeTransform {
     let count = 0;
     if (countWords) {
       count = value?.match(/\w+/gm).length;
-      return count;
+      return count || 0;
     }
     count = value?.match(/\S/gm).length;
-    return count;
+    return count || 0;
   }
 }
