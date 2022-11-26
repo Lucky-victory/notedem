@@ -3,8 +3,8 @@
 >
   <nd-note-card
     (edit)="onEdit($event)"
-    *ngFor="let note of notes | async"
     [note]="note"
+    *ngFor="let note of notes$ | async"
     [activeNoteId]="activeNoteId"
   ></nd-note-card>
 </div>

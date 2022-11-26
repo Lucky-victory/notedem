@@ -1,3 +1,4 @@
+import { metaReducers } from './reducers/index';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -15,6 +16,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { NotesEffects } from './state/notes/notes.effects';
+import { reducers } from './reducers';
+import { NoteEffects } from './state/note/note.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,13 +26,13 @@ import { NotesEffects } from './state/notes/notes.effects';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([]),
-    EffectsModule.forFeature([NotesEffects]),
+    EffectsModule.forRoot([NotesEffects]),
+    EffectsModule.forFeature([NoteEffects]),
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

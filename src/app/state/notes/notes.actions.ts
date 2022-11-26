@@ -3,7 +3,7 @@ import { createAction, props } from '@ngrx/store';
 
 export const loadNotes = createAction(
   '[Notes] Load Notes',
-  props<{ page?: number; perPage?: number }>()
+  props<{ page?: number; perPage?: number }>
 );
 
 export const loadNotesSuccess = createAction(

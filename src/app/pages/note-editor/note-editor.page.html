@@ -15,7 +15,10 @@
     </ion-header>
     <ion-content>
       <!-- <h2 class="text-center mt-4 mb-2 uppercase text-slate-400">pages</h2>-->
-      <nd-note-page-cards (editPage)="onPageEdit($event)"></nd-note-page-cards>
+      <nd-note-page-cards
+        (editPage)="onPageEdit($event)"
+        [pages]="pages"
+      ></nd-note-page-cards>
     </ion-content>
   </ion-menu>
   <ion-menu contentId="menu-content" menuId="menu-content2" side="end">

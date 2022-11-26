@@ -1,3 +1,3 @@
-describe('Notes Selectors', () => {
+describe('Note Selectors', () => {
   it('should select the feature state', () => {});
 });

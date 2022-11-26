@@ -1,3 +1,4 @@
+import { StateStatus } from './../app.state';
 /* eslint-disable max-len */
 import { loadNotes, loadNotesFailure, loadNotesSuccess } from './notes.actions';
 import { Action, createReducer, on } from '@ngrx/store';
@@ -7,7 +8,7 @@ export const notesFeatureKey = 'notes';
 
 export interface INotesState {
   notes: INote[];
-  status: 'loading' | 'error' | 'complete';
+  status: StateStatus;
   error: string | null;
 }
 
@@ -17,17 +18,18 @@ export const initialState: INotesState = {
   error: null,
 };
 
-export const reducer = createReducer(
+export const notesReducer = createReducer(
   initialState,
-  on(loadNotes, (state) => ({ ...state, status: 'loading' })),
-  on(loadNotesSuccess, (state) => ({
+  on(loadNotes, (state) => ({ ...state, status: 'loading', error: null })),
+  on(loadNotesSuccess, (state, { notes }) => ({
     ...state,
+    notes,
     status: 'complete',
     error: null,
   })),
-  on(loadNotesFailure, (state) => ({
+  on(loadNotesFailure, (state,{error}) => ({
     ...state,
     status: 'error',
-    error: state.error,
+    error,
   }))
 );

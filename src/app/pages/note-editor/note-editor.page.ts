@@ -1,3 +1,4 @@
+import { map, switchMap, tap } from 'rxjs';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +10,9 @@ import {
   PopoverController,
 } from '@ionic/angular';
 import { ActionOptionsComponent } from 'src/app/components/action-options/action-options.component';
+import { Store } from '@ngrx/store';
+import { loadNote } from 'src/app/state/note/note.actions';
+import { selectNote } from 'src/app/state/note/note.selectors';
 
 @Component({
   selector: 'nd-note-editor',
@@ -38,10 +42,10 @@ export class NoteEditorPage implements OnInit {
     private route: ActivatedRoute,
     private actionSheet: ActionSheetController,
     private popoverCtrl: PopoverController,
-    private platform: Platform
+    private platform: Platform,
+    private store: Store
   ) {
     this.isMobile = this.platform.is('mobile');
-    console.log({ url: this.platform.url() });
   }
   get contents() {
     const contentsInNote = this.noteToEdit?.pages
@@ -50,28 +54,30 @@ export class NoteEditorPage implements OnInit {
 
     return contentsInNote;
   }
+  get pages() {
+    return this.noteToEdit?.pages;
+  }
   ngOnInit() {
     const noteInState = this.router.getCurrentNavigation().extras
       .state as INote;
-    console.log({ noteInState });
-    this.activeNoteId = noteInState?.id;
-    this.noteToEdit = noteInState;
-    this.pageToEdit = noteInState?.pages && noteInState.pages[0];
-    if (!noteInState) {
-      this.noteId = this.route.snapshot.queryParamMap.get('note');
 
-      // setTimeout(() => {
-      //   noteInState = this.notes.find((note) => note?.id === this.noteId);
-      //   this.activeNoteId = noteInState?.id;
-      //   this.noteToEdit = noteInState;
-      //   this.pageToEdit = noteInState?.pages[0];
-      // }, 3000);
+    this.setNoteToEdit(noteInState);
+    if (!noteInState) {
+      console.log('not state');
+
+      this.route.queryParamMap.subscribe((query) => {
+        this.store.dispatch(loadNote({ noteId: query.get('note') }));
+        this.store.select(selectNote).subscribe((note) => {
+          this.setNoteToEdit(note);
+        });
+      });
     }
   }
 
   onPageEdit(page) {
     this.pageToEdit = page;
   }
+
   showModalOrPopover = async (event, note) => {
     const opts = {
       cssClass: 'nd-action-sheet',
@@ -104,4 +110,10 @@ export class NoteEditorPage implements OnInit {
     });
     await popover.present();
   };
+
+  setNoteToEdit(note: INote) {
+    this.noteToEdit = note;
+    this.activeNoteId = note?.id;
+    this.pageToEdit = note?.pages && note.pages[0];
+  }
 }

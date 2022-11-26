@@ -6,15 +6,13 @@ import {
   OnInit,
   Input,
   Output,
-  AfterViewInit,
-  Inject,
   ViewChildren,
   QueryList,
   ElementRef,
 } from '@angular/core';
 import { INote } from 'src/app/interfaces/notes.interface';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
+import { debounceTime, delay, of, throttle } from 'rxjs';
 import { ShortenPipe } from 'src/app/pipes/shorten/shorten.pipe';
 
 @Component({
@@ -24,7 +22,7 @@ import { ShortenPipe } from 'src/app/pipes/shorten/shorten.pipe';
   standalone: true,
   imports: [CommonModule, IonicModule, ShortenPipe],
 })
-export class NoteCardComponent implements OnInit, AfterViewInit {
+export class NoteCardComponent implements OnInit {
   @Output() edit = new EventEmitter<INote>();
   @Input() note: INote;
   @Input() activeNoteId: string;
@@ -33,6 +31,10 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
   isMobile: boolean;
   constructor(private route: ActivatedRoute, private platform: Platform) {
     this.isMobile = this.platform.is('mobile');
+    this.platform.resize.pipe(debounceTime(1000)).subscribe(() => {
+      this.isMobile = this.platform.is('mobile');
+      console.log('platform observing', this.isMobile);
+    });
   }
 
   ngOnInit() {
@@ -41,15 +43,8 @@ export class NoteCardComponent implements OnInit, AfterViewInit {
       this.active = of(this.note?.id === this.activeNoteId);
     });
   }
-  ngAfterViewInit(): void {
-    // const cardElems = this.noteCards.toArray();
-    // const cardEl = cardElems.find(
-    //   (el) => el.nativeElement.id === this.activeNoteId
-    // );
-  }
-  onEdit(note) {
-    console.log(note);
 
+  onEdit(note) {
     this.edit.emit(note);
   }
   limitText(text: string, limit = 30) {
