@@ -12,29 +12,46 @@ export class NotesService {
   getAll() {
     return this.apiService.get<INote[]>(`notes`).pipe(map((res) => res.data));
   }
-  getOne(noteId: string) {
+  getOne(noteId: string, params = {}) {
     return this.apiService
-      .get<INote>(`notes/${noteId}`)
+      .get<INote>(`notes/${noteId}`, params)
       .pipe(map((res) => res.data));
   }
-  update(noteId: string, noteToUpdate: Partial<INote>) {
+  update<T = Partial<INote>>(
+    noteId: string,
+    noteToUpdate: Partial<INote>,
+    params = {}
+  ) {
     return this.apiService
-      .put<INote>(`notes/${noteId}`, noteToUpdate)
+      .put<T>(`notes/${noteId}`, noteToUpdate, params)
       .pipe(map((res) => res.data));
   }
-  updatePage(noteId: string, noteToUpdate: Partial<INote>) {
+  updatePage<T = Partial<INote>>(
+    noteId: string,
+    noteToUpdate: Partial<INote>,
+    params = {}
+  ) {
     return this.apiService
-      .put<INote>(`notes/${noteId}`, noteToUpdate)
+      .put<T>(`notes/${noteId}`, noteToUpdate, { ...params, part: 'page' })
       .pipe(map((res) => res.data));
   }
-  updateTitle(noteId: string, pageToUpdate: INotePage) {
+  updateTitle<T = Partial<INote>>(
+    noteId: string,
+    pageToUpdate: INotePage,
+    params = {}
+  ) {
     return this.apiService
-      .put<INote>(`notes/${noteId}`, pageToUpdate)
+      .put<T>(`notes/${noteId}`, pageToUpdate, { ...params, part: 'title' })
       .pipe(map((res) => res.data));
   }
-  delete(noteId: string, noteToUpdate: Partial<INote>) {
+  delete(noteId: string) {
     return this.apiService
-      .put<INote>(`notes/${noteId}`, noteToUpdate)
+      .delete<INote>(`notes/${noteId}`)
+      .pipe(map((res) => res.data));
+  }
+  deletePage(noteId: string, notePageId: string) {
+    return this.apiService
+      .delete<INote>(`notes/${noteId}`,{pageId:notePageId})
       .pipe(map((res) => res.data));
   }
 }

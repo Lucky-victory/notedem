@@ -1,5 +1,13 @@
 /* eslint-disable max-len */
-import { loadNote, loadNoteFailure, loadNoteSuccess } from './note.actions';
+import {
+  addPage,
+  addPageSuccess,
+  deletePage,
+  deletePageSuccess,
+  loadNote,
+  loadNoteFailure,
+  loadNoteSuccess,
+} from './note.actions';
 import { StateStatus } from './../app.state';
 import { INote } from 'src/app/interfaces/notes.interface';
 import { Action, createReducer, on } from '@ngrx/store';
@@ -21,6 +29,26 @@ export const initialState: INoteState = {
 export const noteReducer = createReducer(
   initialState,
   on(loadNote, (state) => ({ ...state, status: 'loading', error: null })),
+  on(addPage, (state, { page }) => ({
+    ...state,
+    status: 'adding-page',
+  })),
+  on(deletePage, (state, { pageId }) => ({
+    ...state,note:{...state.note,pages:state.note.pages?.filter((page)=>page.id!==pageId)},
+    status: 'adding-page',
+  })),
+  on(addPageSuccess, (state, { note }) => ({
+    ...state,
+    status: 'complete',
+    note,
+    error: null,
+  })),
+  on(deletePageSuccess, (state, { note }) => ({
+    ...state,
+    status: 'complete',
+    note,
+    error: null,
+  })),
   on(loadNoteSuccess, (state, { note }) => ({
     ...state,
     note,

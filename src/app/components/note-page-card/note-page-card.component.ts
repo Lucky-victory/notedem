@@ -6,6 +6,8 @@ import { of } from 'rxjs';
 import { ShortenPipe } from 'src/app/pipes/shorten/shorten.pipe';
 import { INotePage } from 'src/app/interfaces/notes.interface';
 import { WordCharacterCounterPipe } from 'src/app/pipes/word-character-counter/word-character-counter.pipe';
+import { Store } from '@ngrx/store';
+import { deletePage } from 'src/app/state/note/note.actions';
 
 @Component({
   selector: 'nd-note-page-card',
@@ -19,9 +21,14 @@ export class NotePageCardComponent implements OnInit {
   @Input() page: INotePage;
   @Output() editPage = new EventEmitter<INotePage>();
   @Input() pageIndex: number;
+  @Input() activeNoteId: string;
   isMobile: boolean;
   activePageId: string;
-  constructor(private route: ActivatedRoute, private platform: Platform) {
+  constructor(
+    private route: ActivatedRoute,
+    private platform: Platform,
+    private store: Store
+  ) {
     this.isMobile = this.platform.is('mobile');
   }
 
@@ -36,10 +43,12 @@ export class NotePageCardComponent implements OnInit {
   }
   onCardClick(note) {
     if (this.isMobile) {
-      this.onEdit(note)
+      this.onEdit(note);
     }
   }
-  onDelete(page){
-
+  onDelete(page: INotePage) {
+    this.store.dispatch(
+      deletePage({ noteId: this.activeNoteId, pageId: page.id })
+    );
   }
 }

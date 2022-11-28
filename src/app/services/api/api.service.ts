@@ -32,9 +32,9 @@ export class ApiService {
       }
     );
   }
-  delete<T=any>(path: string) {
-    return this.http.delete<ApiQueryResponse<T>>(
-      `${this.apiBaseUrl}/${path}`,
-    );
+  delete<T = any>(path: string, params = {}) {
+    return this.http.delete<ApiQueryResponse<T>>(`${this.apiBaseUrl}/${path}`, {
+      params,
+    });
   }
 }

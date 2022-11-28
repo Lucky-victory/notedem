@@ -1,4 +1,4 @@
-import { map, switchMap, tap } from 'rxjs';
+import { map, Subscription, switchMap, tap } from 'rxjs';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +11,7 @@ import {
 } from '@ionic/angular';
 import { ActionOptionsComponent } from 'src/app/components/action-options/action-options.component';
 import { Store } from '@ngrx/store';
-import { loadNote } from 'src/app/state/note/note.actions';
+import { addPage, loadNote } from 'src/app/state/note/note.actions';
 import { selectNote } from 'src/app/state/note/note.selectors';
 
 @Component({
@@ -23,7 +23,7 @@ export class NoteEditorPage implements OnInit {
   noteToEdit: INote;
   activeNoteId: string;
   contentsInNote: string;
-
+  canFetchNote = true;
   pageToEdit: INotePage;
   notes = [1, 2, 3, 1, 1, 1, 1, 1].map((_, i) => ({
     id: `note_${i}`,
@@ -34,9 +34,9 @@ export class NoteEditorPage implements OnInit {
     tags: ['first', 'second', 'third'],
     category: `Category ${i + 1}`,
   }));
-
   noteId: string;
   isMobile: boolean;
+  private paramSub: Subscription;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -48,9 +48,11 @@ export class NoteEditorPage implements OnInit {
     this.isMobile = this.platform.is('mobile');
   }
   get contents() {
-    const contentsInNote = this.noteToEdit?.pages
-      ?.map((page) => page?.content)
-      .join(' ');
+    let contentsInNote = '';
+    if (Array.isArray(this.noteToEdit?.pages)) {
+      contentsInNote =
+        this.noteToEdit?.pages.map((page) => page?.content).join(' ') || '';
+    }
 
     return contentsInNote;
   }
@@ -62,10 +64,10 @@ export class NoteEditorPage implements OnInit {
       .state as INote;
 
     this.setNoteToEdit(noteInState);
-    if (!noteInState) {
+    if (!noteInState && this.canFetchNote) {
       console.log('not state');
 
-      this.route.queryParamMap.subscribe((query) => {
+      this.paramSub = this.route.queryParamMap.subscribe((query) => {
         this.store.dispatch(loadNote({ noteId: query.get('note') }));
         this.store.select(selectNote).subscribe((note) => {
           this.setNoteToEdit(note);
@@ -115,5 +117,12 @@ export class NoteEditorPage implements OnInit {
     this.noteToEdit = note;
     this.activeNoteId = note?.id;
     this.pageToEdit = note?.pages && note.pages[0];
+  }
+  onPageAdd(page: INotePage) {
+    // this.canFetchNote = fal se;
+    // this.paramSub?.unsubscribe();
+    console.log({ page }, 'new page ');
+
+    // this.store.dispatch(addPage({ page, noteId: this.activeNoteId }));
   }
 }

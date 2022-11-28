@@ -8,4 +8,4 @@ export interface AppState {
   note: INoteState;
 }
 
-export type StateStatus = 'loading' | 'complete' | 'error';
+export type StateStatus = 'loading' | 'complete' | 'error' | 'adding-page';

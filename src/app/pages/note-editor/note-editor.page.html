@@ -17,6 +17,7 @@
       <!-- <h2 class="text-center mt-4 mb-2 uppercase text-slate-400">pages</h2>-->
       <nd-note-page-cards
         (editPage)="onPageEdit($event)"
+        (newPage)="onPageAdd($event)"
         [pages]="pages"
       ></nd-note-page-cards>
     </ion-content>

@@ -4,7 +4,10 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { INotePage } from 'src/app/interfaces/notes.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Base64UUID } from 'base64-uuid';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
+import { addPage, deletePage } from 'src/app/state/note/note.actions';
 @Component({
   selector: 'nd-note-page-cards',
   templateUrl: './note-page-cards.component.html',
@@ -20,12 +23,18 @@ export class NotePageCardsComponent implements OnInit {
       page,
   }));
   @Output() editPage = new EventEmitter<INotePage>();
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  @Output() newPage = new EventEmitter<INotePage>();
+  activeNoteId: string;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private store: Store<AppState>
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.activeNoteId = this.route.snapshot.queryParamMap.get('note');
+  }
   onEdit(page: INotePage) {
-    console.log({ page });
-
     this.router.navigate(['/notes/edit'], {
       relativeTo: this.route,
       queryParams: {
@@ -35,5 +44,13 @@ export class NotePageCardsComponent implements OnInit {
       replaceUrl: true,
     });
     this.editPage.emit(page);
+  }
+  addNewNotePage() {
+    const page = {
+      id: null,
+      content: '',
+    };
+    // this.newPage.emit(page);
+    this.store.dispatch(addPage({ page, noteId: this.activeNoteId }));
   }
 }
