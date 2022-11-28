@@ -7,6 +7,7 @@ import {
   addPage,
   addPageSuccess,
   deletePage,
+  deletePageSuccess,
   loadNote,
   loadNoteSuccess,
 } from './note.actions';
@@ -33,7 +34,7 @@ export class NoteEffects {
         ofType(addPage),
         switchMap(({ noteId, page }) =>
           this.noteService.updatePage<INote>(noteId, page).pipe(
-            tap((note) => console.log({ note }, 'from state effect')),
+            tap((note) => console.log({ note }, 'from page add effect')),
             map((note) => addPageSuccess({ note }))
           )
         )
@@ -44,10 +45,10 @@ export class NoteEffects {
     () =>
       this.actions$.pipe(
         ofType(deletePage),
-        switchMap(({ noteId, page }) =>
-          this.noteService.updatePage<INote>(noteId, page).pipe(
-            tap((note) => console.log({ note }, 'from state effect')),
-            map((note) => addPageSuccess({ note }))
+        switchMap(({ noteId, pageId }) =>
+          this.noteService.deletePage(noteId, pageId).pipe(
+            tap((note) => console.log({ note }, 'from page delete effect')),
+            map((note) => deletePageSuccess({ note }))
           )
         )
       ),
