@@ -1,7 +1,7 @@
 import { map, Subscription, switchMap, tap } from 'rxjs';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { INote, INotePage } from 'src/app/interfaces/notes.interface';
 import {
   ActionSheetController,
@@ -19,24 +19,17 @@ import { selectNote } from 'src/app/state/note/note.selectors';
   templateUrl: './note-editor.page.html',
   styleUrls: ['./note-editor.page.scss'],
 })
-export class NoteEditorPage implements OnInit {
+export class NoteEditorPage implements OnInit,OnDestroy {
   noteToEdit: INote;
   activeNoteId: string;
   contentsInNote: string;
   canFetchNote = true;
   pageToEdit: INotePage;
-  notes = [1, 2, 3, 1, 1, 1, 1, 1].map((_, i) => ({
-    id: `note_${i}`,
-    created_at: new Date(166456786436).getTime(),
-    updated_at: new Date(166456786436).getTime(),
-    user_id: '1',
-    title: `Title ${i}`,
-    tags: ['first', 'second', 'third'],
-    category: `Category ${i + 1}`,
-  }));
+  notes:INote[]=[]
   noteId: string;
   isMobile: boolean;
   private paramSub: Subscription;
+  noteContent: string;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -48,24 +41,27 @@ export class NoteEditorPage implements OnInit {
     this.isMobile = this.platform.is('mobile');
   }
   get contents() {
-    let contentsInNote = '';
-    if (Array.isArray(this.noteToEdit?.pages)) {
-      contentsInNote =
-        this.noteToEdit?.pages.map((page) => page?.content).join(' ') || '';
-    }
+    // let contentsInNote = '';
+    // if (Array.isArray(this.noteToEdit?.pages)) {
+    //   contentsInNote =
+    //     this.noteToEdit?.pages.map((page) => page?.content).join(' ') || '';
+    // }
 
-    return contentsInNote;
+    return this.noteToEdit?.content;
   }
-  get pages() {
-    return this.noteToEdit?.pages;
-  }
+  /**
+   *@todo for implementing pages functionality
+   */
+  // get pages() {
+  //   return this.noteToEdit?.pages;
+  // }
   ngOnInit() {
     const noteInState = this.router.getCurrentNavigation().extras
       .state as INote;
 
     this.setNoteToEdit(noteInState);
-    if (!noteInState && this.canFetchNote) {
-      console.log('not state');
+    if (!noteInState) {
+    
 
       this.paramSub = this.route.queryParamMap.subscribe((query) => {
         this.store.dispatch(loadNote({ noteId: query.get('note') }));
@@ -75,10 +71,12 @@ export class NoteEditorPage implements OnInit {
       });
     }
   }
-
-  onPageEdit(page) {
-    this.pageToEdit = page;
-  }
+ /**
+   *@todo for implementing pages functionality
+   */
+  // onPageEdit(page) {
+  //   this.pageToEdit = page;
+  // }
 
   showModalOrPopover = async (event, note) => {
     const opts = {
@@ -116,13 +114,21 @@ export class NoteEditorPage implements OnInit {
   setNoteToEdit(note: INote) {
     this.noteToEdit = note;
     this.activeNoteId = note?.id;
-    this.pageToEdit = note?.pages && note.pages[0];
+    this.noteContent=note?.content
+    // this.pageToEdit = note?.pages && note.pages[0];
   }
-  onPageAdd(page: INotePage) {
-    // this.canFetchNote = fal se;
-    // this.paramSub?.unsubscribe();
-    console.log({ page }, 'new page ');
+   /**
+   *@todo for implementing pages functionality
+   */
+  // onPageAdd(page: INotePage) {
+  //   // this.canFetchNote = fal se;
+  //   // this.paramSub?.unsubscribe();
+  //   console.log({ page }, 'new page ');
 
-    // this.store.dispatch(addPage({ page, noteId: this.activeNoteId }));
+  //   // this.store.dispatch(addPage({ page, noteId: this.activeNoteId }));
+  // }
+
+  ngOnDestroy(): void {
+    this.paramSub?.unsubscribe()
   }
 }

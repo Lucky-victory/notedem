@@ -12,7 +12,7 @@ export const environment = {
     google:
       '344512967346-kq3pl5vrvc7b3fc3tgmgg3g3bu8sgumr.apps.googleusercontent.com',
   },
-  apiBaseUrl: 'http://localhost:3000/api',
+  apiBaseUrl: 'https://3000-luckyvictor-serverlessn-0dciue0w2iv.ws-eu77.gitpod.io/api',
 };
 /*
  * For easier debugging in development mode, you can import the following file

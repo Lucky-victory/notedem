@@ -7,6 +7,7 @@ import {
   loadNote,
   loadNoteFailure,
   loadNoteSuccess,
+  updateNote,
 } from './note.actions';
 import { StateStatus } from './../app.state';
 import { INote } from 'src/app/interfaces/notes.interface';
@@ -32,6 +33,10 @@ export const noteReducer = createReducer(
   on(addPage, (state, { page }) => ({
     ...state,
     status: 'adding-page',
+  })),
+  on(updateNote, (state, action) => ({
+    ...state,
+    status:'updating'
   })),
   on(deletePage, (state, { pageId }) => ({
     ...state,note:{...state.note,pages:state.note.pages?.filter((page)=>page.id!==pageId)},

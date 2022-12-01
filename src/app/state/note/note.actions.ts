@@ -5,7 +5,14 @@ export const loadNote = createAction(
   '[Note] Load Note',
   props<{ noteId: string }>()
 );
-
+export const updateNote = createAction(
+  '[Note] Update Note',
+  props<{ noteId: string ,note:Partial<INote>}>()
+);
+export const updateNoteSuccess = createAction(
+  '[Note] Update Note Success',
+  props<{ note: INote }>()
+);
 export const addPage = createAction(
   '[Note] Add Page',
   props<{ noteId: string; page: INotePage }>()

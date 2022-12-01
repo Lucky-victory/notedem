@@ -10,8 +10,9 @@ import {
   deletePageSuccess,
   loadNote,
   loadNoteSuccess,
+  updateNote,
 } from './note.actions';
-import { map, switchMap, tap } from 'rxjs';
+import { debounceTime, map, switchMap, tap, } from 'rxjs';
 import { INotePage } from 'src/app/interfaces/notes.interface';
 
 @Injectable()
@@ -41,12 +42,26 @@ export class NoteEffects {
       ),
     { dispatch: true }
   );
+  updateNote$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updateNote),debounceTime(2000),
+        switchMap(({ noteId, note }) =>
+          this.noteService.update<INote>(noteId,note).pipe(
+            tap((note) => console.log({ note }, 'from note update effect')),
+            map((note) => loadNoteSuccess({ note }))
+          )
+        )
+      ),
+    { dispatch: true }
+  );
   deleteNotePage$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(deletePage),
         switchMap(({ noteId, pageId }) =>
           this.noteService.deletePage(noteId, pageId).pipe(
+        
             tap((note) => console.log({ note }, 'from page delete effect')),
             map((note) => deletePageSuccess({ note }))
           )

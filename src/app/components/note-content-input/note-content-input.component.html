@@ -1,8 +1,9 @@
 <textarea
   placeholder="Note..."
   class="flex-grow text-base p-3 h-full bg-transparent w-full whitespace-normal resize-none border-none outline-none"
-  [value]="content"
+  [(ngModel)]="content"
   [attr.data-note-id]="noteId"
-  [attr.data-page-id]="notePageId"
-  [attr.data-content]="content"
-></textarea>
+
+
+(keyup)="updateNote()"
+  ></textarea>

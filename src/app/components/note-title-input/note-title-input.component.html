@@ -2,7 +2,7 @@
   <ion-input
     type="text"
     name="noteTitle"
-    [value]="title"
+    [(ngModel)]="title"
     placeholder="Title"
     class="placeholder:font-semibold bg-transparent border-0 border-b-2 border-gray-300 dark:border-gray-500 p-4 focus:border-0 text-xl block font-semibold sm:text-lg"
     (keyup)="updateTitle(title)"
