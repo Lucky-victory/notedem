@@ -11,7 +11,7 @@ import {
 } from '@ionic/angular';
 import { ActionOptionsComponent } from 'src/app/components/action-options/action-options.component';
 import { Store } from '@ngrx/store';
-import { addPage, loadNote } from 'src/app/state/note/note.actions';
+import { addPage, loadNote, upsertNote, upsertNoteSuccess } from 'src/app/state/note/note.actions';
 import { selectNote } from 'src/app/state/note/note.selectors';
 
 @Component({
@@ -58,16 +58,21 @@ export class NoteEditorPage implements OnInit,OnDestroy {
   ngOnInit() {
     const noteInState = this.router.getCurrentNavigation().extras
       .state as INote;
-
-    this.setNoteToEdit(noteInState);
+    this.activeNoteId = this.route.snapshot.queryParamMap.get('note');
+  
+    if (noteInState) {
+      
+      this.store.dispatch(upsertNoteSuccess({note:noteInState}))
+    }
+      this.store.select(selectNote).subscribe((note) => {
+          this.setNoteToEdit(note);
+        });
     if (!noteInState) {
     
 
       this.paramSub = this.route.queryParamMap.subscribe((query) => {
         this.store.dispatch(loadNote({ noteId: query.get('note') }));
-        this.store.select(selectNote).subscribe((note) => {
-          this.setNoteToEdit(note);
-        });
+      
       });
     }
   }
@@ -114,7 +119,8 @@ export class NoteEditorPage implements OnInit,OnDestroy {
   setNoteToEdit(note: INote) {
     this.noteToEdit = note;
     this.activeNoteId = note?.id;
-    this.noteContent=note?.content
+    this.noteContent = note?.content;
+  
     // this.pageToEdit = note?.pages && note.pages[0];
   }
    /**

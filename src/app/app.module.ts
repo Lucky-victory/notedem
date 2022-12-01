@@ -29,7 +29,7 @@ import { NoteEffects } from './state/note/note.effects';
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
-      logOnly: environment.production,
+      logOnly: environment.production
     }),
     EffectsModule.forRoot([NotesEffects]),
     EffectsModule.forFeature([NoteEffects]),

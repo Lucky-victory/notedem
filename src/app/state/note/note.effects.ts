@@ -11,6 +11,8 @@ import {
   loadNote,
   loadNoteSuccess,
   updateNote,
+  upsertNote,
+  upsertNoteSuccess,
 } from './note.actions';
 import { debounceTime, map, switchMap, tap, } from 'rxjs';
 import { INotePage } from 'src/app/interfaces/notes.interface';
@@ -24,7 +26,7 @@ export class NoteEffects {
         switchMap(({ noteId }) =>
           this.noteService
             .getOne(noteId)
-            .pipe(map((note) => loadNoteSuccess({ note })))
+            .pipe(map((note) => upsertNoteSuccess({ note })))
         )
       ),
     { dispatch: true }
@@ -42,14 +44,14 @@ export class NoteEffects {
       ),
     { dispatch: true }
   );
-  updateNote$ = createEffect(
+  upsertNote$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(updateNote),debounceTime(2000),
+        ofType(upsertNote),debounceTime(2000),
         switchMap(({ noteId, note }) =>
           this.noteService.update<INote>(noteId,note).pipe(
-            tap((note) => console.log({ note }, 'from note update effect')),
-            map((note) => loadNoteSuccess({ note }))
+            tap((note) => console.log({ note }, 'from note upsert effect')),
+            map((note) => upsertNoteSuccess({ note }))
           )
         )
       ),

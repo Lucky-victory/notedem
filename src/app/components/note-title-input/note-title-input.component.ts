@@ -17,9 +17,12 @@ export class NoteTitleInputComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    // console.log(this.noteId);
+  
   }
-  updateTitle(title) {
+  updateTitle() {
+    console.log({
+      title:this.title,noteId:this.noteId
+    });
     
   }
 }

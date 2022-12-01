@@ -8,6 +8,7 @@ import {
   loadNoteFailure,
   loadNoteSuccess,
   updateNote,
+  upsertNoteSuccess,
 } from './note.actions';
 import { StateStatus } from './../app.state';
 import { INote } from 'src/app/interfaces/notes.interface';
@@ -54,7 +55,7 @@ export const noteReducer = createReducer(
     note,
     error: null,
   })),
-  on(loadNoteSuccess, (state, { note }) => ({
+  on(upsertNoteSuccess, (state, { note }) => ({
     ...state,
     note,
     status: 'complete',

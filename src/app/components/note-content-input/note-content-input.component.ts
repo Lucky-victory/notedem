@@ -4,9 +4,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AppState, StateStatus } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
-import { updateNote } from 'src/app/state/note/note.actions';
-import { debounceTime, delay, of, tap, throttleTime } from 'rxjs';
-import { debounce } from 'lodash'
+import { updateNote, upsertNote } from 'src/app/state/note/note.actions';
+
 
 @Component({
   selector: 'nd-note-content-input',
@@ -31,19 +30,22 @@ export class NoteContentInputComponent implements OnInit {
     });
   }
   updateNote() {
-    console.log('hellll');
-    
-    const store = this.store;
     const data = {
       noteId: this.noteId, note: { content: this.content }
     }
-    
-    this.store.dispatch(updateNote(data))
-    debounce(() => {
-      console.log('retrgfthjkl');
+    const thiz=this
+    const update = this.debounce(() =>
       
-    } ,
-    2000)
+      thiz.store.dispatch(upsertNote(data))
+    );
+    update()
+  
   }
-
+debounce=(func, timeout = 2000)=>{
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
+}
 }

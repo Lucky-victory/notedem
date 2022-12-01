@@ -8,9 +8,17 @@ export const loadNote = createAction(
 export const updateNote = createAction(
   '[Note] Update Note',
   props<{ noteId: string ,note:Partial<INote>}>()
-);
-export const updateNoteSuccess = createAction(
-  '[Note] Update Note Success',
+  );
+  export const updateNoteSuccess = createAction(
+    '[Note] Update Note Success',
+    props<{ note: INote }>()
+    );
+    export const upsertNote = createAction(
+      '[Note] upsert Note',
+      props<{ noteId: string,note:Partial<INote> }>()
+    );
+export const upsertNoteSuccess = createAction(
+  '[Note] Upsert Note Success',
   props<{ note: INote }>()
 );
 export const addPage = createAction(
