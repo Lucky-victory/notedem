@@ -40,14 +40,13 @@ export const notesReducer = createReducer(
   })),
   on(upsertNoteSuccess,(state, {note}) =>{ 
   const i = state.notes.findIndex(_note => _note.id === note.id);
-  console.log({i},'note index');
+
   
     if (i > -1) {
-      // state.notes[i] = note;
+   
 
       const notes=state.notes.map((_note)=>_note.id===note.id?note:_note)
-      console.log({notes}, 'from reducer');
-      console.log('here in if');
+      
       return {
         ...state,
         notes
@@ -55,7 +54,7 @@ export const notesReducer = createReducer(
       
     }
     else {
-      console.log('here in else');
+
       
       return {
 ...state,notes:[...state.notes,note]

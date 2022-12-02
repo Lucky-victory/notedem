@@ -1,8 +1,11 @@
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { debounce, distinctUntilChanged } from 'rxjs';
+
 import { FormsModule } from '@angular/forms';
+import { upsertNote } from 'src/app/state/note/note.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
 
 @Component({
   selector: 'nd-note-title-input',
@@ -14,15 +17,28 @@ import { FormsModule } from '@angular/forms';
 export class NoteTitleInputComponent implements OnInit {
   @Input() title: string;
   @Input() noteId: string;
-  constructor() {}
+  constructor(private store:Store<AppState>) {}
 
   ngOnInit() {
   
   }
   updateTitle() {
-    console.log({
-      title:this.title,noteId:this.noteId
-    });
-    
+    const data = {
+      noteId: this.noteId, note: { title: this.title }
+    }
+    const thiz = this;
+    const update = this.debounce(() =>
+      
+      thiz.store.dispatch(upsertNote(data))
+    );
+    update()
+  
   }
+debounce=(func, timeout = 2000)=>{
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
+}
 }

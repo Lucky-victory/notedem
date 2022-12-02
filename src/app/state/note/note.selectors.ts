@@ -7,3 +7,11 @@ export const selectNote = createSelector(
   selectOne,
   (state: INoteState) => state.note
 );
+export const selectNoteStatus = createSelector(
+  selectOne,
+  (state: INoteState) => state.status
+);
+export const selectNoteError= createSelector(
+  selectOne,
+  (state: INoteState) => state.error
+);

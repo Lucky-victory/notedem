@@ -5,14 +5,14 @@ export const loadNote = createAction(
   '[Note] Load Note',
   props<{ noteId: string }>()
 );
-export const updateNote = createAction(
-  '[Note] Update Note',
-  props<{ noteId: string ,note:Partial<INote>}>()
-  );
-  export const updateNoteSuccess = createAction(
-    '[Note] Update Note Success',
-    props<{ note: INote }>()
-    );
+// export const updateNote = createAction(
+//   '[Note] Update Note',
+//   props<{ noteId: string ,note:Partial<INote>}>()
+//   );
+//   export const updateNoteSuccess = createAction(
+//     '[Note] Update Note Success',
+//     props<{ note: INote }>()
+//     );
     export const upsertNote = createAction(
       '[Note] upsert Note',
       props<{ noteId: string,note:Partial<INote> }>()
@@ -42,10 +42,6 @@ export const addPageFailure = createAction(
   props<{ error: string }>()
 );
 
-export const loadNoteSuccess = createAction(
-  '[Note] Load Note Success',
-  props<{ note: INote }>()
-);
 
 export const loadNoteFailure = createAction(
   '[Note] Load Note Failure',

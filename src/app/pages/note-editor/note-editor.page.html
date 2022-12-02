@@ -1,5 +1,5 @@
 <ion-split-pane contentId="menu-content" when="md" class="split-pane">
-  <!-- <ion-menu
+  <ion-menu
     contentId="menu-content"
     menuId="menu-content"
     side="start"
@@ -21,7 +21,7 @@
         [pages]="pages"
       ></nd-note-page-cards>
     </ion-content>
-  </ion-menu> -->
+  </ion-menu>
   <ion-menu contentId="menu-content" menuId="menu-content2" side="end">
     <ion-header>
       <ion-toolbar>
@@ -40,6 +40,10 @@
     </ion-header>
     <ion-content>
       <div class="p-5 max-sm:p-4 h-full dark:bg-slate-800">
+
+        <div class="update-status">
+          {{isUpdating ? 'saving...':'saved'}}
+        </div>
         <ul class="list-none py-4 mt-4 px-1 shadow-sm rounded-sm">
           <li class="flex items-center mb-2 text-sm">
             <span class="text-gray-400 flex items-center">
@@ -47,7 +51,7 @@
               Last updated:
             </span>
             <span class="text-current ml-2">
-              {{noteToEdit?.updated_at|date:'short'}}
+              {{noteToEdit?.updated_at|date:'medium'}}
             </span>
           </li>
 
@@ -57,7 +61,7 @@
               Created on:
             </span>
             <span class="text-current ml-2">
-              {{noteToEdit?.created_at|date:'short'}}
+              {{noteToEdit?.created_at|date}}
             </span>
           </li>
           <li class="flex items-center mb-2 text-sm">
@@ -114,7 +118,7 @@
             </span>
           </li>
         </ul>
-        <!-- <h2 class="capitalize text-lg text-gray-400 mt-4 mb-2">Current Page</h2>
+        <h2 class="capitalize text-lg text-gray-400 mt-4 mb-2">Current Page</h2>
         <ul class="list-none pb-4 pt-2 mt-2 px-1 shadow-sm rounded-sm">
           <li class="flex items-center mb-2 text-sm">
             <span class="text-gray-400 flex items-center">
@@ -143,7 +147,7 @@
               {{pageToEdit?.content|wordCharacterCounter}}
             </span>
           </li>
-        </ul> -->
+        </ul>
       </div>
     </ion-content>
   </ion-menu>
@@ -174,12 +178,13 @@
       <div class="flex flex-col flex-1 h-full">
         <nd-note-title-input
           [title]="noteToEdit?.title"
-          [noteId]="noteToEdit?.id"
+          [noteId]="activeNoteId"
         ></nd-note-title-input>
         <nd-note-content-input
-          [content]="noteToEdit?.content"
+          [content]="pageToEdit?.content"
           [noteId]="activeNoteId"
-         
+         [notePageId]="pageToEdit?.id"
+         [pages]="pages"
           class="flex-grow h-full"
         ></nd-note-content-input>
       </div>

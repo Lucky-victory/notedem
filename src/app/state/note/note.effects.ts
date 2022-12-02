@@ -9,8 +9,8 @@ import {
   deletePage,
   deletePageSuccess,
   loadNote,
-  loadNoteSuccess,
-  updateNote,
+
+
   upsertNote,
   upsertNoteSuccess,
 } from './note.actions';
@@ -38,7 +38,7 @@ export class NoteEffects {
         switchMap(({ noteId, page }) =>
           this.noteService.updatePage<INote>(noteId, page).pipe(
             tap((note) => console.log({ note }, 'from page add effect')),
-            map((note) => addPageSuccess({ note }))
+            map((note) => upsertNoteSuccess({ note }))
           )
         )
       ),
@@ -65,11 +65,11 @@ export class NoteEffects {
           this.noteService.deletePage(noteId, pageId).pipe(
         
             tap((note) => console.log({ note }, 'from page delete effect')),
-            map((note) => deletePageSuccess({ note }))
+ 
           )
         )
       ),
-    { dispatch: true }
+    { dispatch: false}
   );
 
   constructor(private actions$: Actions, private noteService: NotesService) {}

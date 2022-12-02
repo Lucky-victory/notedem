@@ -4,7 +4,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AppState, StateStatus } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
-import { updateNote, upsertNote } from 'src/app/state/note/note.actions';
+import { upsertNote } from 'src/app/state/note/note.actions';
+import { INotePage } from 'src/app/interfaces/notes.interface';
 
 
 @Component({
@@ -19,21 +20,21 @@ export class NoteContentInputComponent implements OnInit {
   @Input() noteId: string;
   @Input() notePageId: string;
   @Input() noteStatus: StateStatus;
-
+@Input() pages:INotePage[]
   constructor(private store:Store<AppState>) {}
 
   ngOnInit() {
-    console.log({
-      content: this.content,
-      noteId: this.noteId,
-      pageId: this.notePageId,
-    });
+    
   }
   updateNote() {
+  
+    const pages = this.pages?.map((page) => {
+     return page?.id ===this.notePageId ?{id:this.notePageId,content:this.content}:page
+    })
     const data = {
-      noteId: this.noteId, note: { content: this.content }
+      noteId: this.noteId, note: { pages}
     }
-    const thiz=this
+    const thiz = this;
     const update = this.debounce(() =>
       
       thiz.store.dispatch(upsertNote(data))
